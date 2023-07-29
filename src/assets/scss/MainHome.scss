@@ -1,0 +1,101 @@
+@font-face {
+    font-family: RobotoBold;
+    src: url("../fonts/Roboto-Bold.ttf");
+}
+@font-face {
+    font-family: RobotoRegular;
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+
+@mixin displayFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+// bold and attention: logo, headlines, calls to action
+// (! too much o.range can be overwhelming and detract from the user experience)
+$orange:  #d88e05;
+
+//  background and text to make your content stand out and create a sense of space and clarity
+// (!  too much w.hite can make your design look sterile and impersonal.)
+$white: #fff; 
+
+// create a contrast or add depth
+// buttons, borders, and background colors to create a sense of hierarchy and structure.
+$lightGray: #D3D3D3;
+
+// create contrast and add depth to your design.
+
+// elements like text, icons, and borders to create a sense of visual interest and sophistication. 
+// (! too much, as it can make the design look heavy and oppressive.)
+$darkGray: #333333; // contras or add depth to the design
+
+body {
+    overflow-x: hidden;
+    font-family: 'RobotoRegular', sans-serif;
+    background-color: $lightGray;
+    color: $darkGray;
+}
+p,h1,h2,h3,h4,h5 {
+    margin:0;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+button {
+    border:none;
+    outline: none;
+    background-color: transparent;
+}
+
+
+.main_container {
+    width: 100%;
+    min-height: 700px;
+    border:solid red;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+// Main content
+
+.main-content {
+   min-height: 500px;
+   border:solid black;
+   width: 100%;
+ 
+}
+.main-content-wrap {
+    min-height: 500px;
+    border:solid orange;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    margin-top:150px;
+}
+.main-cont-wraproutes {
+    border:solid green;
+}
+ 
+.main-cont-backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.1s;
+    pointer-events: none;
+}
+.searchbackdrop-active {
+    opacity: 1;
+}

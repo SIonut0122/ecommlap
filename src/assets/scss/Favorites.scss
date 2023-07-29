@@ -1,0 +1,403 @@
+
+@import './layout/mixin.scss';
+
+ 
+
+.favorites-container {
+    width: 100%;
+    min-height: 400px;
+    @include displayFlex();
+    position: relative;
+}
+.fav-useraccount-wrapper {
+    max-width: 100%;
+    width: 330px;
+    box-shadow: 0 0 2px 0 #000;
+    @include displayFlex();
+    flex-direction: column;
+    text-align: center;
+    margin-right:20px;
+    min-height: 370px;
+    padding: 15px;
+    border-radius: 3px;
+
+    p:first-of-type {
+        font-weight: bold;
+        margin-top:10px;
+    }
+    p {
+        font-size: 16px;
+        margin-bottom: 5px;
+
+    
+    }
+
+    svg {
+        font-size:80px;
+        color: var(--bs-darkgray);
+       
+    }
+    button {
+        max-width: 100%;
+        width: 200px;
+        margin:5px 0 5px 0;
+        svg {
+            color: inherit;
+        }
+    }
+}
+.fav-userbox-right-loggedin {
+    width: 100%;
+    @include displayFlexColumn;
+}
+.favorites-cont-cont {
+    display: flex;
+    align-items: flex-start;
+    padding: 55px 10px 10px 10px;
+ 
+    
+}
+.favcont-wrpprod-cont {
+    width: 100%;
+    @include displayFlex();
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 0 #000;
+}
+.favcont-wrpprodcont-head {
+    width: 100%;
+    min-height: 35px;
+    @include displayFlex();
+    justify-content: flex-start;
+    text-align: left;
+    border-bottom: 1px solid var(--bs-darkgray);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+
+    span:nth-child(1) {
+        font-weight: bold;
+        font-size: 23px;
+        height: 100%;
+    }
+    
+    span:nth-child(2) {
+        font-size: 17px;
+        height: 100%;
+        margin-left: 10px;
+    }
+
+
+}
+.favorites-cont-emptyfav {
+    width: 100%;
+    @include displayFlex();
+    min-height: 280px;
+    flex-direction: column;
+
+    svg {
+        font-size: 75px;
+        margin-bottom: 15px;
+        color: var(--bs-darkgray);
+    }
+    p {
+    
+    }
+    button {
+        margin-top:20px;
+    }
+}
+
+.favorites-cont-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+.favorite-card-product {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    align-items: flex-start;
+    border:1px solid transparent;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+        box-shadow: 0 0 2px 0 #000;
+    }
+
+
+    .favcard-removemob-icon {
+        position: relative;
+        min-height: 35px;
+        margin-top:5px;
+        width: 100%;
+        display: none;
+        justify-content: flex-end;
+        position: relative;
+        p {
+            position: absolute;
+            left: 5px;
+            top:50%;
+            transform: translateY(-50%);
+            color: green;
+        }
+        span {
+            width: 40px;
+            text-align: center;
+            cursor: pointer;
+            @include displayFlex();
+
+            i {
+                font-size: 25px;
+            }    
+        }
+ 
+    }
+    img {
+        height: 150px;
+        width: 200px;
+    }
+    .removefav-def-btn {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+.fav-card-content {
+   width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    p:nth-child(1) {
+        font-family: RobotoBold;
+        font-size:17px;
+        transition: 0.2s color;
+        &:hover {
+            color: #000;
+        }
+    }
+ 
+}
+.favcard-stars {
+	display: flex;
+	align-items: center;
+	
+
+	.favcard-rating {
+		margin-left:5px;
+		margin-top:5px;
+        font-size: 14px;
+	}
+    .react-stars {
+        span {
+            font-size: 25px !important;
+        }
+    }
+}
+
+.fav-card-actions {
+	width: 350px;
+	@include displayFlex();
+	flex-direction: column;
+	justify-content: flex-start;
+    align-items: flex-end;
+	padding: 10px;
+
+    button, span {
+        max-width: 100%;
+        width: 150px;
+        border:1px solid #1976d2;
+        border-radius: 4px;
+        padding: 5px 10px;
+        line-height: 1.75;
+        color: #1976d2;
+        @include displayFlex();
+        justify-content: flex-end;
+        text-align: right;
+        cursor: pointer;
+        margin:3px 0 3px 0;
+        transition: opacity 0.2s;
+
+        i {
+            margin-right: 8px;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+   
+
+    }
+    span {
+        font-size: 14px;
+        width: 100px;
+        padding: 3px 10px;
+        border:none;
+
+     
+        
+    }
+    
+    p {
+        width: 100%;
+        text-align: right;
+    }
+	
+    .favcard-act-availability {
+        color: green;
+        font-size: 15px;
+    }
+    .favcard-act-price {
+        color: var(--bs-orange);;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .addtocart-def-btn {
+       border:1px solid var(--bs-orange); 
+       color: var(--bs-orange);
+       padding: 2px 3px;
+       justify-content: center;
+
+       &:hover {
+        border:1px solid var(--bs-orange-hover); 
+       }
+    }
+    .removefav-def-btn {
+        color: var(--bs-darkgray);
+        font-size: 14px;
+        &:hover {
+            color: #000;
+        }
+    }
+ 
+}
+
+
+.favuseracc-wrp-logged {
+    background-color: #fff;
+    padding-bottom: 30px;
+    
+    p {
+        width: 100%;
+        text-align: left;
+        &:first-of-type {
+            font-size: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    a {
+        border-bottom:1px solid var(--bs-orange-hover);
+        width: 100%;
+        text-align: left;
+        padding: 5px 0;
+
+        &:hover {
+            color: var(--bs-orange-hover);
+        }
+    }
+    svg {
+        fill: var(--bs-orange);
+    }
+}
+
+@media (max-width: 991.5px) {
+    .favorites-cont-cont {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .fav-useraccount-wrapper {
+        width: 100%;
+    }
+    .favcont-wrpprod-cont {
+        margin-top:20px;
+    }
+    .fav-card-content {
+         p:nth-child(1) {
+             font-family: RobotoBold;
+             font-size:18px;
+         }
+        }
+}
+
+@media (max-width: 767.5px) {
+    .fav-useraccount-wrapper,
+    .favcont-wrpprod-cont {
+        box-shadow: none;
+    }
+    .favorite-card-product {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 5px 15px 5px;
+
+        .favcard-removemob-icon  {
+            display: flex;
+        }
+        .fav-card-content {
+            padding: 0;
+           
+            p {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .favcard-stars {
+            justify-content: center;
+        }
+        img {
+            max-width: 100%;
+            width: 250px;
+            height: auto;
+        }
+        .fav-card-actions {
+            padding: 0;
+            width: 100%;
+           flex-direction: row;
+           flex-wrap: wrap;
+           justify-content: center;
+
+            p {
+                text-align: center;
+            }
+            span {
+                display: none;
+            }
+            .favcard-act-availability {
+                display: none;
+            }
+            button {
+                justify-content: center;
+                align-items: center;
+                width: 200px;
+            }
+        }
+    }
+}
+
+@media (max-width: 576.5px) {
+    .favorites-cont-cont {
+        padding: 55px 0 0 0;
+    }
+    .fav-useraccount-wrapper {
+        padding:0;
+        padding-top: 15px;
+    }
+    .favcont-wrpprod-cont {
+        padding: 0;
+        padding-top: 15px;
+    }
+    .favuseracc-wrp-logged {
+        padding: 15px;
+    }
+}

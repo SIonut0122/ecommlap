@@ -1,0 +1,66 @@
+
+$greenColor: green;
+$lightGray: #D3D3D3;
+$orange:  #d88e05;
+$darkGray: #333333;
+
+#addedto-alertview{
+    position: fixed;
+    right: 0;
+    top:25%;
+    pointer-events: none;
+    z-index: 9999;
+}
+.favaddedmsg-aview {
+    position: relative;
+    width: 320px;
+    height: 80px;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 0 20px -10px $darkGray;
+    z-index: 999;
+  animation: alertAnimation 0.5s ease-in-out;
+  pointer-events: visible;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+
+  i {
+    order:1;
+    font-size: 25px;
+    color: red;
+    margin-right: 10px;
+  }
+  p {
+    order: 2;
+    font-size: 14px;
+  }
+  span {
+    position: absolute;
+    top:3px;
+    right: 3px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    color: $darkGray;
+
+  
+  }
+
+}
+
+@keyframes alertAnimation {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+ 

@@ -1,0 +1,37 @@
+ body {
+  * {
+    &:focus {
+      // border:1px solid var(--bs-orange) !important;
+      // outline: 0 !important;
+      // box-shadow: none !important;
+    }
+
+  }
+ }
+ 
+ p {
+    font-size: 17px;
+ }
+
+ h1,h2,h3,h4,h5 {
+   margin:0;
+ }
+ a:hover {
+   color: inherit;
+ }
+ .btn-logout-default {
+  padding: 0;
+ }
+
+ 
+ :root {
+  --color-blue: #0d6efd;
+  --color-white: #fff;
+  --bs-green: green;
+  --bs-lightgray: #D3D3D3;
+  --bs-orange: #d88e05;
+  --bs-orange-hover: #a96f04;
+  --bs-darkgray: #333333;
+  --bs-darklight: #adadad;
+  --bs-darkmedium: #acacac;
+}

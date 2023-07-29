@@ -1,0 +1,40 @@
+{
+  "name": "ecomm-vite",
+  "private": true,
+  "homepage": "https://sionut0122.github.io/newecomm",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@auth0/auth0-react": "^2.0.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.8",
+    "faunadb": "^4.7.1",
+    "gh-pages": "^4.0.0",
+    "history": "^5.3.0",
+    "material-ui-popup-state": "^5.0.8",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-paginate": "^8.2.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.6.2",
+    "uuid": "^9.0.0",
+    "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^3.0.0",
+    "sass": "^1.57.1",
+    "vite": "^4.0.0"
+  }
+}

@@ -1,0 +1,131 @@
+@import './layout/mixin.scss';
+
+.login-container-wrapper {
+    display: flex;
+    justify-content: center;
+    border:solid green;
+    padding: 70px 0 70px 0;
+}
+.login-container {
+    @include displayFlex();
+    background-color: var(--bs-darklight);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 30px;
+ 
+}
+.login-cont-half-wrapper {
+    min-height: 300px;
+    @include displayFlex();
+    background-color: var(--bs-darklight);
+    padding:50px 30px 50px 30px;;
+    justify-content: space-around;
+    width: 100%;
+}
+.login-container-half {
+    width: 45%;
+    min-height: 300px;
+    @include displayFlex();
+    background-color: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    div {
+        min-height: 150px;
+        width: 100%;
+        @include displayFlex();
+        flex-direction: column;
+    }
+    button {
+        text-transform: none;
+        max-width: 100%;
+        width: 260px;
+        height: 45px;
+        margin-bottom: 10px;
+        transition: box-shadow 0.2s;
+        font-weight: bold;
+
+        &:hover {
+            box-shadow: 0 0 2px 0 var(--bs-darkgray);
+        }
+    }
+}
+.login-chalf-title {
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--bs-orange);
+}
+
+.login-container-half-alreadyacc {
+    button {
+        &:first-of-type {
+            border:1px solid var(--bs-orange);
+            color: #fff;
+            background-color: var(--bs-orange);
+        }
+        &:nth-of-type(2) {
+            background-color: #DB4437;
+            color: #fff;
+            border:1px solid #DB4437;
+        }
+    }
+}
+
+.login-container-half-newacc {
+    button {
+        &:nth-of-type(1) {
+            background-color: #DB4437;
+            color: #fff;
+            border:1px solid #DB4437;
+        }
+    }
+    p {
+        &:nth-of-type(2) {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (max-width: 1199.5px) {
+}
+
+@media (max-width: 991.5px) {
+    .login-container-half { 
+        button {
+            width: 230px;
+        }
+    }
+}
+
+@media (max-width: 767.5px) {
+    .login-cont-half-wrapper {
+        flex-direction: column;
+    }
+    .login-container-half {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+        min-height: auto;
+
+        div {
+            min-height: 150px;
+        }
+        
+    }
+    .login-container-half { 
+        padding: 0 15px 0 15px;
+        button {
+            width: 230px;
+            margin: 15px;
+        }
+    }
+}
+
+@media (max-width: 576.5px) {
+    .login-cont-half-wrapper {
+        padding: 0 10px 50px 10px;
+    }
+    .login-container {
+        padding: 30px 15px;
+    }
+}

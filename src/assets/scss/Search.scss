@@ -1,0 +1,21 @@
+@import './layout/mixin.scss';
+
+
+.search-container-wrapper {
+    @include displayFlexColumn;
+    justify-content: flex-start;
+    padding-bottom: 70px;
+    .search-cont-wrapitems {
+        position: relative;
+width: 100%;
+min-width: 280px;
+display: flex;
+align-items: flex-start;
+justify-content: flex-start;
+flex-wrap: wrap;
+    }
+
+  .productinfo-wrp-prodtitle {
+    margin-bottom: 70px;
+  }
+}

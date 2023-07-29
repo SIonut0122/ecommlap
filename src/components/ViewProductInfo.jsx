@@ -1,0 +1,217 @@
+import React, {useEffect, useState, useContext} from "react";
+import { useParams }     from 'react-router-dom'; 
+import { MainContext} from "../MainHome";
+import products from '../assets/js/products';
+import AddToCartBtn from './modules/addtocartbtn';
+import ProductInfoBottom from './reusable/product-info-description';
+import ReactStars from "react-rating-stars-component";
+import RemoveCartProduct from './modules/removecartproduct';
+import AddToFavorites from './modules/addtofavbtn';
+import RemoveFavorite from './modules/removefavorite';
+import AddedToCartDisplay from './modules/addedtocartdisplay';
+import Button from '@mui/material/Button';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import { Carousel } from 'react-responsive-carousel';
+import {Link }     from 'react-router-dom'; 
+ 
+
+
+
+
+function ViewProductInfo( ) {
+  const { count, setCount } = useContext(MainContext);
+  let { id } = useParams();
+  const { selectedProduct, setSelectedProduct } = useContext(MainContext);
+  const [ratingValue, setRatingValue] = useState();
+  const { cartContext, setCartContext } = useContext(MainContext);
+  const { displayAddedToCartMsg, setDisplayAddedToCartMsg } = useContext(MainContext);
+
+
+  useEffect(() => {
+
+    let filterProduct = products.filter(el => el.id == id);
+    setSelectedProduct(filterProduct[0]);
+
+    return () => {
+      // Unmount 'Added to cart  modal message'
+      setDisplayAddedToCartMsg(false);
+    }
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRatingValue(selectedProduct.rating);
+    },1000);
+
+    // Set window title
+    document.title = selectedProduct.title;
+  },[selectedProduct]);
+
+  useEffect(() => {
+    console.log('Added to cart from product info');
+  },[cartContext])
+
+  const priceAlert = () => {
+    let alertProducts = [];
+
+    if(localStorage.getItem('priceAlertList') !== null && localStorage.getItem('priceAlertList').length > 0) {
+      let alertProducts = [...JSON.parse(localStorage.getItem('priceAlertList'))];
+ 
+
+      if(!alertProducts.includes(selectedProduct.id)) {
+        let newAlertList = [...alertProducts, selectedProduct.id];
+        localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
+      }
+      } else {
+        let newAlertList = [...alertProducts, selectedProduct.id];
+        localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
+      }
+  }
+
+let discountPercentage = () => {
+  const oldPrice = selectedProduct.oldPrice;
+  const newPrice = selectedProduct.price;
+  const discountPercentage = ((selectedProduct.oldPrice - selectedProduct.price) / selectedProduct.oldPrice) * 100;
+  return '-'+discountPercentage.toFixed(2)+'%';
+
+}
+
+  return (
+    <div className="productinfo-cont-wrp">
+                <div className='productinfo-container container'>
+          <div className='productinfo-wrp-prodhref'>
+            <span><Link to={'/magazin'}>Magazin</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></span>
+            <span>Cod produs: {selectedProduct.modelNo}</span>
+          </div>
+          <div className='productinfo-wrp-prodtitle'><h4>{selectedProduct.id} - {selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
+
+          <div className='productinfo-wrapper'>
+            <section className='prodinfo-wrp-col-one'>
+              <Carousel showArrows={0} emulateTouch={1} showIndicators={0} showStatus={0}>
+                  <div>
+                  <img src={`../../images/${selectedProduct.img}`} alt={selectedProduct.title}/>
+                  </div>
+                  <div>
+                  <img src={`../../images/${selectedProduct.img}`} alt={selectedProduct.title}/>
+                  </div>
+                  <div>
+                  <img src={`../../images/${selectedProduct.img}`} alt={selectedProduct.title}/>
+                  </div>
+              </Carousel>
+            </section>
+            <section className='prodinfo-wrp-col-two'>
+              {/* Price */}
+              <div className='prodinfo-wcoltwo-price'>
+                  <div className='prodinfo-wcoltwoprice-wrpprice'>
+                    <div>
+                      <p>{selectedProduct.oldPrice && selectedProduct.oldPrice}</p>
+                      {selectedProduct.oldPrice && (
+                        <span>
+                          {discountPercentage()}
+                        </span>
+                      )}
+                    </div>
+                    <h4>{selectedProduct.price}<span>lei</span></h4>
+                  </div>
+                  <div className='prodinfo-wcoltwoprice-wrppricealert'>
+                    <Button disableRipple 
+                            startIcon={<NotificationsNoneOutlinedIcon />}
+                            onClick={priceAlert}>
+                            Alertă preț
+                     </Button>
+                  </div>
+              </div>
+
+              {/* Rating */}
+              <div className="prodinfo-rating-wrapper">
+                <div>
+                  {ratingValue && (
+                    <ReactStars
+                    value={ratingValue}
+                    edit={false}
+                    count={5}
+                    size={25}
+                    activeColor="#ffd700"
+                    />
+                    )}
+                    <span className="prodinfo-rating-value-no">
+                      {ratingValue !== null && (
+                        <div>
+                        <span>{ratingValue}</span>
+                        <a href="#">(10 review-uri)</a>
+                        </div>
+                      )}
+                    </span>
+                </div>
+
+                  <span className='prodinfo-availability-txt'>
+                    <i className='bi bi-patch-check-fill'></i>
+                    În stoc
+                    </span>
+              </div>
+
+              <div className="prodinfo-color-wrapper">
+                     <span>Culoare:</span>
+                     <span>{selectedProduct.color}</span>
+                    
+              </div>
+           
+              {/* More info */}
+              <div className='prodinfo-wrpcoltwo-moreinfo'>
+                <span className="prodinfo-wrpcoltwo-moreinfo-delivery">
+                  <span>
+                   <i className="bi bi-truck"></i>
+                   Livrare și retur gratuite de la 1500 lei
+                  </span>
+                </span>
+              </div>
+
+              <div className='prodinfo-wrpcoltwo-moreinfo'>
+                <span className="prodinfo-wrpcoltwo-moreinfo-delivery prodinfo-wrpmoreinfo-retur">
+                  <span>
+                   <i className="bi bi-clock-history"></i>
+                    30 de zile pentru retur 
+                  </span>
+                </span>
+              </div>
+
+              <div className='prodinfo-wrpcoltwo-moreinfo'>
+                <span className="prodinfo-wrpcoltwo-moreinfo-delivery prodinfo-wrpmoreinfo-discount">
+                  <span>
+                  <i className="bi bi-piggy-bank"></i>
+                    La peste 3000lei ai -5% discount
+                  </span>
+                </span>
+              </div>
+
+              {/* Buttons */}
+              <div className='prodinfo-wrpcoltwo-action'>
+
+           
+                  <AddToCartBtn addedProduct={selectedProduct} text='Adauga in cos'/>
+
+                 <div className='prodinfo-wpcoltwo-action-addremovefavbtn'>
+                  {!selectedProduct.addedToFav ? (
+                      <AddToFavorites iclassname='bi bi-heart' addToFavTxt='Adauga la Favorite' addedProductToFav={selectedProduct}/>
+                      ):(
+                      <RemoveFavorite removeFromFavText='Elimina' iclassname='bi bi-heart-fill' removedFromFavorites={selectedProduct}/>
+                    )} 
+                  </div>
+              </div>
+
+            </section>
+          </div>
+            {displayAddedToCartMsg && (
+              <AddedToCartDisplay addedToCartProduct={selectedProduct}/>
+            )}
+            
+        </div>
+            <div className="container-fluid">
+              <ProductInfoBottom />
+            </div>
+    </div>  
+  );
+}
+
+export default ViewProductInfo;
