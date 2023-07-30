@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { MainContext} from "../MainHome";
 import ReactStars from "react-rating-stars-component";
 import AddToCartBtn from './modules/addtocartbtn';
@@ -17,6 +17,11 @@ function Favorites( ) {
   const { favoritesContext, setFavoritesContext } = useContext(MainContext);
   const { displayAddedToCartMsg, setDisplayAddedToCartMsg } = useContext(MainContext);
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+  useEffect(() => {
+ // Set title
+  document.title = 'Produse favorite';
+  },[])
 
   return (
         <div className='favorites-container container-fluid'>

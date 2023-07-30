@@ -9,16 +9,28 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarIcon from '@mui/icons-material/Star';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import {Link }     from 'react-router-dom'; 
-
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 
 function MyAccount() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading, logout } = useAuth0();
   const navigate = useNavigate();
   const { productsContext, setProductsContext } = useContext(MainContext);
   const [ storageAlertList, setStorageAlertList ] = useState([]);
   const [ priceAlertsList, setPriceAlertsList ] = useState([]);
-
+  const { favoritesContext, setFavoritesContext } = useContext(MainContext);
+  const [ displayAccountDataContainer , setDisplayAccountDataContainer ] = useState(true); 
+  const [ displayPriceAlertContainer , setDisplayPriceAlertContainer ] = useState(false); 
+  const [ displayAddressContainer, setDisplayAddressContainer ] = useState(false); 
+  const [ displayOrdersContainer, setDisplayOrdersContainer ] = useState(false); 
+  
 
   // useEffect(() => {
   //   const fetchProducts = async () => {
@@ -46,9 +58,42 @@ function MyAccount() {
   } else {
       console.log(`priceAlertList not found`);
   }
+
+   // Set title
+   document.title = 'Contul meu';
+
   },[])
 
 
+  const handleNabBtns = (e) => {
+    let navValue = e.target.getAttribute('data-myacc-nav');
+      console.log('clicked');
+    setDisplayAddressContainer(false);
+    setDisplayPriceAlertContainer(false);
+    setDisplayAccountDataContainer(false);
+    setDisplayOrdersContainer(false);
+
+        switch(navValue) {
+        case 'info':
+            setDisplayAccountDataContainer(true);
+        break;
+        case 'orders':
+          setDisplayOrdersContainer(true);
+        break;
+        case 'alerts':
+        
+          setDisplayPriceAlertContainer(true);
+        break;
+        case 'address':
+          setDisplayAddressContainer(true);
+        break;
+        case 'logout':
+          console.log('logout');
+        break;
+      default:
+        return;
+    }
+  }
   const removeAlertPriceItem = (e) => {
     console.log('remove');
     let priceAlertList = JSON.parse(localStorage.getItem('priceAlertList')) || [];
@@ -81,16 +126,20 @@ function MyAccount() {
           <div className="myaccount-cont-wrapper">
             <div className="myacc-cont-half-leftmenu">
                 <ul>
-                  <li>Date personale</li>
-                  <li>Comenzile mele</li>
-                  <li>Alertele de pret</li>
-                  <li>Iesi din cont</li>
+                  <li className="myacc-leftmenu-btn" data-myacc-nav='info' onClick={(e) => handleNabBtns(e)}><PersonOutlineOutlinedIcon /> Date personale</li>
+                  <li className="myacc-leftmenu-btn" data-myacc-nav='orders' onClick={(e) => handleNabBtns(e)}><Inventory2OutlinedIcon/> Comenzile mele</li>
+                  <li className="myacc-leftmenu-btn" data-myacc-nav='alerts' onClick={(e) => handleNabBtns(e)}><NotificationsActiveOutlinedIcon /> Alertele de pret</li>
+                  <li className="myacc-leftmenu-btn" data-myacc-nav='address' onClick={(e) => handleNabBtns(e)}><ContactMailOutlinedIcon /> Adresa de livrare</li>
+                  <li className="myacc-leftmenu-btn" data-myacc-nav='logout' onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}><LogoutOutlinedIcon /> Iesi din cont</li>
                 </ul>
               </div>
               <div className="myacc-cont-half-content">
-                
+              
+              {/* USER INFO SECTION */}
+              {displayAccountDataContainer && 
+                <>
                 <div className="myacc-conthalf-cont-userdetails myacc-default-box">
-                  <p className="myacc-stitle-def">Datele contului</p> 
+                  <p className="myacc-stitle-def"><PersonIcon /> Datele contului</p> 
                   <div className="myacc-conthalfcont-userdetails-wrp">
                     <img id="myacc-user-avatar" src={user.picture} alt=""/>
                     <div className="myacccont-cont-details">
@@ -137,23 +186,23 @@ function MyAccount() {
                     </div>
                   </div>
                 </div>
+
                 
                 <div className="myacc-conthalf-cont-activity myacc-default-box"> 
-                  <p className="myacc-stitle-def">Activitatea mea</p> 
+                  <p className="myacc-stitle-def"><SignalCellularAltIcon /> Activitatea mea</p> 
                   <div className="myacc-conthalfcont-activity-wrp">
                       <div className="myacccont-activity-box myacccont-activity-orders">
                         <WidgetsIcon />
                         <ul>
                           <li>9 comenzi plasate</li>
-                          <li><a href="#">Vezi istoric</a></li>
+                          <li><a href="#">Vezi comenzi</a></li>
                         </ul>
                       </div>
                       <div className="myacccont-activity-box myacccont-activity-boxfav">
                          <FavoriteIcon />
                           <ul>
-                            <li>9 comenzi plasate</li>
-                            <li>9 comenzi plasate</li>
-                            <li><a href="#">Vezi istoric</a></li>
+                            <li>{favoritesContext.length} favorite</li>
+                            <li><Link to={'/favorites'}>Vezi favorite</Link></li>
                           </ul>
                       </div> 
                       <div className="myacccont-activity-box myacccont-activity-reviews">
@@ -166,12 +215,27 @@ function MyAccount() {
                       </div>       
                   </div>
                 </div>
+                </>
+              }
 
+              {/* ORDERS SECTION */}
+              {displayOrdersContainer && 
+                <div className="myacc-default-box">
+                  <p className="myacc-stitle-def"> <Inventory2OutlinedIcon/> Comenzile mele</p>
+                  <div className="myacc-myorders-wrapper">
+                  <p className="myacc-alert-emptymsg">Nu s-a gasit istoricul comenzilor</p>
+                  </div>
+                </div>
+                }
+                
+              {/* PRICE ALERT SECTION */}
+              {displayPriceAlertContainer && 
                 <div className="myacc-conthalf-cont-pricealerts myacc-default-box">
-               
-                <p className="myacc-stitle-def"> <NotificationsActiveIcon /> Alerte de pret</p> 
+                    <p className="myacc-stitle-def"> <NotificationsActiveIcon /> Alerte de pret</p> 
                     <ul>
-                        {priceAlertsList.map((el,index) => 
+                    {priceAlertsList.length > 0 ? (
+                       <>
+                       {priceAlertsList.map((el,index) => 
                                 <li key={index}>
                                 <Link to={`/viewproduct/${el.id}`}>
                                   <img src={`../images/${el.img}`} alt=''/>
@@ -180,8 +244,51 @@ function MyAccount() {
                                 <button type="button" data-id={el.id} onClick={(e) => removeAlertPriceItem(el.id)}>x</button>
                             </li>
                           )}
+                       </>
+                    ) : (
+                          <p className="myacc-alert-emptymsg">Nu aveti setate alerte de pret</p>
+                    )}
                     </ul>       
                 </div>
+              }
+
+              {/* DELIVERY ADDRESS SECTION */}
+              {displayAddressContainer && 
+                <div className="myacc-default-box myacc-address-box">
+                <p className="myacc-stitle-def"><ContactMailIcon /> Adresa de livrare</p> 
+                    <form method="POST" action="" id="user-accform-address">
+                        <div className="chck-type-sec">
+                            <div className="chcktype-secaddress-wrp">
+                                <label htmlFor="chk-form-inp-name" className="form-label">Nume si prenume</label>
+                                <input type="text" className="form-control" id="chk-form-inp-name" required/>
+                            </div>
+                            <div className="chcktype-secaddress-wrp">
+                              <label htmlFor="chk-form-inp-lastname" className="form-label">Adresa completa</label>
+                              <input type="text" className="form-control" id="chk-form-inp-lastname" placeholder="Strada,bl.5,et.2,ap.12" required/>
+                            </div>
+                      </div>
+                      <div className="chck-type-sec mt-2">
+                            <div className="chcktype-secaddress-wrp">
+                                <label htmlFor="chk-form-inp-name" className="form-label">Oras</label>
+                                <input type="text" className="form-control" id="chk-form-inp-name" required/>
+                            </div>
+                            <div className="chcktype-secaddress-wrp">
+                              <label htmlFor="chk-form-inp-lastname" className="form-label">Telefon</label>
+                              <input type="text" className="form-control" id="chk-form-inp-lastname" required/>
+                            </div>
+                      </div>
+                      <div className="chck-type-sec mt-2">
+                            <div className="chcktype-secaddress-wrp">
+                              <label htmlFor="chk-form-inp-lastname" className="form-label">Specificatii</label>
+                              <input type="text" className="form-control" id="chk-form-inp-lastname" placeholder="Interfon,etc."required/>
+                            </div>
+                      </div>
+                      
+                      <button type="submit" className="btn-def-mid-250 mt-4">Salveaza</button>
+                    </form>
+                </div>
+              }
+                
               </div>
           </div>
           

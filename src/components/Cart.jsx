@@ -32,6 +32,8 @@ function Cart( ) {
    // Reset checkout value
    setProceedToCheckout(false);
 
+  // Set title
+  document.title = 'Cosul meu';
   }, [])
 
 

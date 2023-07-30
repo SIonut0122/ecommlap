@@ -76,6 +76,9 @@ function AllProducts() {
     setDisplayFilteredProducts(true);
   }, 400);
 
+  // Set window title
+  document.title = 'Laptopuri si accesorii - Comanda online';
+
   return () => {
     setDisplayAddedToCartMsg(false);
     setDisplayOffers(false);

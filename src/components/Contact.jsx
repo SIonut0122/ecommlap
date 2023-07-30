@@ -1,7 +1,12 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { MainContext} from "../MainHome";
 
 function Contact( ) {
+  
+  useEffect(() => {
+  // Set title
+  document.title = 'Contacteaza-ne';
+  },[])
   
   return (
         <div className='contact-container'>
