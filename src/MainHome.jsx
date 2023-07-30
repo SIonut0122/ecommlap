@@ -87,7 +87,7 @@ function MainHome() {
 
   
   return (
-    <BrowserRouter basename="/ecommlap">
+    <BrowserRouter basename={import.meta.env.PUBLIC_URL}>
     <div className='main_container'>
       <div className="main-cont-backdrop"></div>
       
