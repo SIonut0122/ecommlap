@@ -111,7 +111,7 @@ function Header( ) {
 
                 <div className='head-maincont-wrp-row head-maincont-wrp-rowfirst'>
                     <div className="header-user-wrapper container">
-                        <span className="head-logo-icon">LOGO</span>
+                        <Link to={'/'} className="head-logo-icon">LOGO</Link>
                         
                         <div className="head-searchnav-cont">
                             <input id="header-search-input"
