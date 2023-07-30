@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist -b develop"
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
