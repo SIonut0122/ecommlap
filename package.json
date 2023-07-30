@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "SET NODE_ENV=production && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "deploy": "gh-pages -d dist -b develop"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
