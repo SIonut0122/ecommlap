@@ -19,7 +19,7 @@ import Offers from './components/Offers';
 import Contact from './components/Contact';
 import MyAccount from './components/MyAccount';
 
-const base = import.meta.env.PUBLIC_URL; 
+
 
 
   export const MainContext = React.createContext();
@@ -87,7 +87,7 @@ function MainHome() {
 
   
   return (
-    <BrowserRouter basename={base}>
+    <BrowserRouter basename={import.meta.env.PUBLIC_URL}>
     <div className='main_container'>
       <div className="main-cont-backdrop"></div>
       
