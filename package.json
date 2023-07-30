@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "clean": "rimraf dist",
-    "build": "SET NODE_ENV=production && npm run clean && vite build",
+    "build": "SET NODE_ENV=production && vite build",
     "preview": "vite preview",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
@@ -35,7 +34,6 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
-    "rimraf": "^5.0.1",
     "sass": "^1.57.1",
     "vite": "^4.0.0"
   }
