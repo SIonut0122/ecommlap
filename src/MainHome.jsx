@@ -87,7 +87,7 @@ function MainHome() {
 
   
   return (
-<HashRouter>
+<BrowserRouter>
     <div className='main_container'>
       <div className="main-cont-backdrop"></div>
       
@@ -136,7 +136,7 @@ function MainHome() {
       </section>
 
     </div>
-    </HashRouter>
+    </BrowserRouter>
 
   );
 }

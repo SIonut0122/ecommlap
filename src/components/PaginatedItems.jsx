@@ -32,7 +32,7 @@ function Items({ currentItems }) {
                                 </span>
                           <div className="allprod-imgehead-wrp">
                             <Link to={`/viewproduct/${el.id}`}>
-                              <img className='allprod-img-head' src={`../images/${el.img}`} alt=''/>
+                              <img className='allprod-img-head' src={`images/${el.img}`} alt=''/>
                             </Link>
                           </div>
                           <div className='allprod-prodthub-caption'>

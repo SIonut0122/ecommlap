@@ -59,8 +59,8 @@ function Home() {
     const typeCard  = document.querySelector('.type');
     // Move the image to the right using translateY based on scroll percentage
     deployImage.style.transform = `translateX(${Math.min(percentOfScreenHeightScrolled * 100, 100)}%)`;
-    envCard.style.transform = `translateY(${Math.min(percentOfScreenHeightScrolled * 100, 100)}%) translateX(${Math.min(percentOfScreenHeightScrolled * 50, 50)}%)`;
-    typeCard.style.transform = `translateX(${Math.min(percentOfScreenHeightScrolled * 100, 100)}%)`;
+    envCard.style.transform = `translateY(-${Math.min(percentOfScreenHeightScrolled * 100, 100)}%) translateX(${Math.min(percentOfScreenHeightScrolled * 50, 50)}%)`;
+    typeCard.style.transform = `translateY(-${Math.min(percentOfScreenHeightScrolled * 100, 100)}%) translateX(${Math.min(percentOfScreenHeightScrolled * 100, 10)}%)`;
   
   }
 
@@ -96,8 +96,7 @@ function Home() {
                 <div className="left">
                   <h1>Magazinul tau online de tehnologie</h1>
                   <p>
-                    The only platform that gives AI the ability to autonomously build web
-                    services.
+                    Alege laptop-ul care ti se potriveste din varietatea noastra de produse.
                   </p>
                 </div>
                 <div className="right">
@@ -107,21 +106,20 @@ function Home() {
                 </div>
               </section>
               <section className="full-screen-section first-main-section">
-                <h1>Completely Visual</h1>
-                <p>Never touch the command line, from provision to production.</p>
+                <h1>Laptopuri</h1>
+                <p>Cele mai performante laptop-uri la un click distanta.</p>
                 <div data-img-to-show="#img-1"></div>
               </section>
               <section className="full-screen-section">
-                <h1>Full Stack</h1>
+                <h1>Accesorii</h1>
                 <p>
-                  Never manage infrastructure again. One click gets you: a database, APIs,
-                  deployments, hosting, etc.
+                  Accesoriile nu trebuie sa lipseasca! Alege tot ce ai nevoie pentru rutina zilnica.
                 </p>
                 <div data-img-to-show="#img-2"></div>
               </section>
               <section className="full-screen-section">
-                <h1>Launch Faster</h1>
-                <p>Logical can get systems to market in minutes instead of weeks.</p>
+                <h1>Comanda online</h1>
+                <p>Relaxeaza-te! Comanda ta este la un click distanta.</p>
                 <div data-img-to-show="#img-3"></div>
               </section>
             </div>
