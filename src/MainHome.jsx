@@ -87,7 +87,7 @@ function MainHome() {
 
   
   return (
-    <BrowserRouter basename={import.meta.env.PUBLIC_URL}>
+    <HashRouter basename={import.meta.env.PUBLIC_URL}>
     <div className='main_container'>
       <div className="main-cont-backdrop"></div>
       
@@ -136,7 +136,7 @@ function MainHome() {
       </section>
 
     </div>
-    </BrowserRouter>
+    </HashRouter>
 
   );
 }
