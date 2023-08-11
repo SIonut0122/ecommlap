@@ -407,6 +407,10 @@ function Checkout() {
                                                 <p>Cost livrare:</p>
                                                 <p>19.99 lei</p>
                                             </div>
+                                            <div className="checkout-summary-row">
+                                                <p>Discount (3000lei):</p>
+                                                <p>-5%</p>
+                                            </div>
                                         </div>
                                         <div className="checkoutcontrow-checkoutsummary-col checkoutsummary-col-right">
                                             <p className="content-title">Total: {displayTotalAmount()} lei</p>

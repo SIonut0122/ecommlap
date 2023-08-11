@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: './',
   plugins: [react({
     input: ['assets/scss/layout/default.scss', 'assets/js/products.js'],
     refresh: true,

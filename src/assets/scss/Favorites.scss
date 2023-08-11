@@ -128,7 +128,7 @@
     align-items: flex-start;
     border:1px solid transparent;
     transition: box-shadow 0.2s;
-
+    box-shadow: 0 0 1px 0 #000;
     &:hover {
         box-shadow: 0 0 2px 0 #000;
     }
@@ -164,6 +164,7 @@
     img {
         height: 150px;
         width: 200px;
+        object-fit:contain;
     }
     .removefav-def-btn {
         &:hover {

@@ -25,6 +25,7 @@ function ViewProductInfo( ) {
   let { id } = useParams();
   const { selectedProduct, setSelectedProduct } = useContext(MainContext);
   const [ratingValue, setRatingValue] = useState();
+  const [showAlertMsg, setShowAlertMsg] = useState(false);
   const [isPriceAlert, setIsPriceAlert] = useState(false);
   const { cartContext, setCartContext } = useContext(MainContext);
   const { displayAddedToCartMsg, setDisplayAddedToCartMsg } = useContext(MainContext);
@@ -81,6 +82,11 @@ function ViewProductInfo( ) {
       let newAlertList = [...alertProducts, selectedProduct.id];
       localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
       setIsPriceAlert(true);
+      setShowAlertMsg(true);
+
+      setTimeout(() => {
+        setShowAlertMsg(false);
+      },4000);
     }
   };
   
@@ -97,7 +103,7 @@ let discountPercentage = () => {
     <div className="productinfo-cont-wrp">
                 <div className='productinfo-container container'>
           <div className='productinfo-wrp-prodhref'>
-            <span><Link to={'/magazin'}>Magazin</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></span>
+            <span><Link to={'/products'}>Produse</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></span>
             <span>Cod produs: {selectedProduct.modelNo}</span>
           </div>
           <div className='productinfo-wrp-prodtitle'><h4>{selectedProduct.id} - {selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
@@ -117,6 +123,10 @@ let discountPercentage = () => {
               </Carousel>
             </section>
             <section className='prodinfo-wrp-col-two'>
+            {showAlertMsg && 
+              <div className="prodinfo-alert-price-added">Alerta de pret a fost setata</div>
+            }
+
               {/* Price */}
               <div className='prodinfo-wcoltwo-price'>
                   <div className='prodinfo-wcoltwoprice-wrpprice'>

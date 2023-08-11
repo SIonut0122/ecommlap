@@ -659,7 +659,7 @@ const higherThan = '<';
 
               <div className='allprod-filter-box'>
                 <span className='ap-filbox-title'>Pret<span><i className="fa-solid fa-angle-right"></i></span></span>
-                <div className='allprod-fbox-wrap'>
+                <div className='allprod-fbox-wrap hide-filter-box'>
                   <input 
                     id="allprod_filter_slider" 
                     type="range" 
