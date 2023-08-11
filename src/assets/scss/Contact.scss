@@ -1,0 +1,14 @@
+@import './layout/mixin.scss';
+
+
+.contact-container {
+    width: 100%;
+    
+    .container {
+        border-radius: 5px;
+        min-height: 400px;
+        background-color: #fff;
+        @include displayFlexColumn();
+        padding: 20px 15px;
+    }
+}

@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, createContext} from "react";
 import { HashRouter,Routes,Route,Link , BrowserRouter}     from 'react-router-dom'; 
 import './assets/js/js';
 import Header from './components/includes/Header';
+import MobileMenu from './components/includes/MobileMenu';
 import Home from './components/Home';
 import PageNotFound from './components/Pagenotfound';
 import About from './components/About';
@@ -89,6 +90,10 @@ function MainHome() {
   return (
 <BrowserRouter>
     <div className='main_container'>
+    
+    <div className="mobile-menu-container">
+       <MobileMenu />
+    </div>
       <div className="main-cont-backdrop"></div>
       
       <section className='w-100 main-content p-0'>

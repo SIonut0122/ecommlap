@@ -11,6 +11,7 @@ import RemoveFavorite from './modules/removefavorite';
 import AddedToCartDisplay from './modules/addedtocartdisplay';
 import Button from '@mui/material/Button';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 import {Link }     from 'react-router-dom'; 
@@ -24,6 +25,7 @@ function ViewProductInfo( ) {
   let { id } = useParams();
   const { selectedProduct, setSelectedProduct } = useContext(MainContext);
   const [ratingValue, setRatingValue] = useState();
+  const [isPriceAlert, setIsPriceAlert] = useState(false);
   const { cartContext, setCartContext } = useContext(MainContext);
   const { displayAddedToCartMsg, setDisplayAddedToCartMsg } = useContext(MainContext);
 
@@ -33,11 +35,23 @@ function ViewProductInfo( ) {
     let filterProduct = products.filter(el => el.id == id);
     setSelectedProduct(filterProduct[0]);
 
+    checkItemAlertPrice();
     return () => {
       // Unmount 'Added to cart  modal message'
       setDisplayAddedToCartMsg(false);
     }
   }, [])
+
+  const checkItemAlertPrice = () => {
+    if(localStorage.getItem('priceAlertList') !== null && localStorage.getItem('priceAlertList').length > 0) {
+      let alertProducts = [...JSON.parse(localStorage.getItem('priceAlertList'))];
+       
+      if(alertProducts.includes(id)) {
+       setIsPriceAlert(true);
+      }
+    }
+    console.log('asgagas');
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,21 +67,23 @@ function ViewProductInfo( ) {
   },[cartContext])
 
   const priceAlert = () => {
-    let alertProducts = [];
-
-    if(localStorage.getItem('priceAlertList') !== null && localStorage.getItem('priceAlertList').length > 0) {
-      let alertProducts = [...JSON.parse(localStorage.getItem('priceAlertList'))];
- 
-
-      if(!alertProducts.includes(selectedProduct.id)) {
-        let newAlertList = [...alertProducts, selectedProduct.id];
-        localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
-      }
-      } else {
-        let newAlertList = [...alertProducts, selectedProduct.id];
-        localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
-      }
-  }
+    // Get the existing alertProducts list from localStorage
+    let alertProducts = JSON.parse(localStorage.getItem('priceAlertList')) || [];
+  
+    // Check if the selectedProduct.id exists in the alertProducts list
+    if (alertProducts.includes(selectedProduct.id)) {
+      // If it exists, remove it from the list
+      let newAlertList = alertProducts.filter((productId) => productId !== selectedProduct.id);
+      localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
+      setIsPriceAlert(false);
+    } else {
+      // If it doesn't exist, add it to the list
+      let newAlertList = [...alertProducts, selectedProduct.id];
+      localStorage.setItem('priceAlertList', JSON.stringify(newAlertList));
+      setIsPriceAlert(true);
+    }
+  };
+  
 
 let discountPercentage = () => {
   const oldPrice = selectedProduct.oldPrice;
@@ -116,7 +132,7 @@ let discountPercentage = () => {
                   </div>
                   <div className='prodinfo-wcoltwoprice-wrppricealert'>
                     <Button disableRipple 
-                            startIcon={<NotificationsNoneOutlinedIcon />}
+                            startIcon={!isPriceAlert ? <NotificationsNoneOutlinedIcon /> : <NotificationsActiveIcon />}
                             onClick={priceAlert}>
                             Alertă preț
                      </Button>

@@ -98,3 +98,10 @@ button {
 .searchbackdrop-active {
     opacity: 1;
 }
+
+
+@media (max-width: 576.5px) { 
+    .main-content-wrap {
+        margin-top:110px;
+    }
+}

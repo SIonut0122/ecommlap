@@ -4,19 +4,22 @@ import {Link }     from 'react-router-dom';
 import LogoutButton from "../modules/logoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import {Button, LoginIcon, FavoriteBorderIcon,ShoppingCartOutlinedIcon} from './materialui-import';
-
+import LogoDevOutlinedIcon from '@mui/icons-material/LogoDevOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 function Header( ) {
   const { cartContext, setCartContext } = useContext(MainContext);
   const { favoritesContext, setFavoritesContext } = useContext(MainContext);
     const { user, isAuthenticated, isLoading } = useAuth0();
     const [ searchValue, setSearchValue ] = useState('');
+    const [ openMobileMenu, setOpenMobileMenu ] = useState(false);
     const { productsContext, setProductsContext } = useContext(MainContext);
     const { pureProductsList, setPureProductsList } = useContext(MainContext);
     const [ resultedSearchedList, setResultedSearchedList ] = useState([]);
@@ -104,6 +107,14 @@ function Header( ) {
         searchBackdrop.classList.add('searchbackdrop-active');
     }
 
+    const handleMobileMenu = () => {
+        const mobileContainer = document.querySelector('.mobile-menu-container');
+        
+        mobileContainer.classList.toggle('show-mobmenu');
+       
+        document.querySelector('body').classList.toggle('no-scrolling');
+    }
+
   return (
     
             <header className='header-main-container'>
@@ -111,8 +122,26 @@ function Header( ) {
 
                 <div className='head-maincont-wrp-row head-maincont-wrp-rowfirst'>
                     <div className="header-user-wrapper container">
-                        <Link to={'/'} className="head-logo-icon">LOGO</Link>
-                        
+                        <div className="head-wraphambmenu" onClick={handleMobileMenu}>
+                            <MenuIcon />
+                        </div>
+                        <div className="head-wrap-logo">
+                            <Link to={'/'} className="head-logo-icon"><LogoDevOutlinedIcon /></Link>
+                        </div>
+                        <div className="head-wrap-mobile-icons">
+                        <Link to={'/favorites'} className="head-right-icon btn-def-act">
+                                    <FavoriteBorderIcon />
+                                    {favoritesContext.length > 0 && ( 
+                                    <span className="headright-icon-val">{favoritesContext.length}</span>
+                                    )}
+                                </Link>
+                                <Link to={'/cart'} className="head-right-icon btn-def-act">
+                                    <ShoppingCartOutlinedIcon />
+                                    {cartContext.length > 0 && ( 
+                                    <span className="headright-icon-val">{cartContext.length}</span>
+                                    )}
+                                </Link>
+                        </div>
                         <div className="head-searchnav-cont">
                             <input id="header-search-input"
                             type="text" placeholder="Cauta in magazin..." 
@@ -140,11 +169,11 @@ function Header( ) {
                         <div className="header-wrapbtns">
 
                                 <Link to={'/favorites'} className="head-right-icon btn-def-act">
-                                <FavoriteBorderIcon />
-                                <span>Favorite</span>
-                                {favoritesContext.length > 0 && ( 
-                                 <span className="headright-icon-val">{favoritesContext.length}</span>
-                                 )}
+                                    <FavoriteBorderIcon />
+                                    <span>Favorite</span>
+                                    {favoritesContext.length > 0 && ( 
+                                    <span className="headright-icon-val">{favoritesContext.length}</span>
+                                    )}
                                 </Link>
                                 <Link to={'/cart'} className="head-right-icon btn-def-act">
                                     <ShoppingCartOutlinedIcon />
@@ -152,7 +181,7 @@ function Header( ) {
                                     {cartContext.length > 0 && ( 
                                     <span className="headright-icon-val">{cartContext.length}</span>
                                     )}
-                                    </Link>
+                                </Link>
 
                                 <PopupState variant="popover" popupId="header-user-dropdown">
                                 {(popupState) => (
@@ -180,6 +209,7 @@ function Header( ) {
                                 )}
                                 </PopupState>
                         </div>
+
                     </div>
                 </div>
 
@@ -191,8 +221,9 @@ function Header( ) {
                                 <Link to={'/categorii'} aria-label='contact' tabIndex='0'>Categorii</Link>
                                 <Link to={'/contact'} aria-label='contact' tabIndex='0'>Contact</Link>
                             </div>
-                    </div>
-
+                 </div>
+                
+                
             </header>
       
   );

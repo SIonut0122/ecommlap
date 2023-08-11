@@ -10,7 +10,9 @@ function Contact( ) {
   
   return (
         <div className='contact-container'>
-          Contact
+          <div className="container">
+            <h4 className="h4title">Contact</h4>
+          </div>
         </div>
   );
 }
