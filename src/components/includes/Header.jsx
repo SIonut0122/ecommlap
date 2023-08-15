@@ -109,10 +109,8 @@ function Header( ) {
 
     const handleMobileMenu = () => {
         const mobileContainer = document.querySelector('.mobile-menu-container');
-        
-        mobileContainer.classList.toggle('show-mobmenu');
-       
-        document.querySelector('body').classList.toggle('no-scrolling');
+        mobileContainer.classList.toggle('show-mobmenu'); // display mobile menu
+        document.querySelector('body').classList.toggle('no-scrolling'); // disable body scrolling
     }
 
   return (

@@ -362,12 +362,8 @@ li {
 
     }
 }
-.show-mobmenu { 
-    display: block;
-}
-.no-scrolling {
-    overflow: hidden !important;
-}
+
+
 .mobile-menu-close {
     cursor: pointer;
 }
@@ -416,8 +412,12 @@ li {
     .head-wrap-logo {
         order:3;
     }
-
-   
+    .show-mobmenu { 
+        display: block;
+    }
+    .no-scrolling {
+        overflow: hidden !important;
+    }
 }
 
 @media (max-width: 767.5px) {

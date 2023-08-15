@@ -16,8 +16,8 @@ function MobileMenu() {
 
     function closeMobileMenu() {
         const mobileContainer = document.querySelector('.mobile-menu-container');
-        
-        mobileContainer.classList.remove('show-mobmenu');
+        mobileContainer.classList.remove('show-mobmenu'); // hide mobile menu
+        document.querySelector('body').classList.toggle('no-scrolling'); // disable body scroll
     }
    
     return (

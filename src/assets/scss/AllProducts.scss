@@ -723,7 +723,13 @@ border-bottom-right-radius: 5px;
  
 
 .allprod-cap-prodtitle {
-  font-size: 17px;
+  font-size: 15px;
+  display: -webkit-box;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+line-clamp: 2;
+-webkit-line-clamp: 2;
 }
 
 .allprod-cap-prodprice {

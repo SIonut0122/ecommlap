@@ -463,14 +463,31 @@
     color: #000;
     p {
         font-size: 17px;
+        width: 100%;
+        width: 500px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 2;
+        -webkit-line-clamp: 3;
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 5px;
+        .btn-def-sm{
+            padding: 5px 10px;
+            text-align: center;
+            margin-top:10px;
+        } 
     }
     .adddprod-showc-price {
         font-weight: bold;
         color: var(--bs-darkgray);
     }
-    a {
-        margin-left:25px;
-    }
+   
 }
 
  .addedtocartdisplay-prod-contrwp-recom {
