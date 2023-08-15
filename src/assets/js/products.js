@@ -1097,4 +1097,4 @@ const products = [
 export default products;
 
 
-https://www.ubuy.com.ro/en/category/electronics/laptops-565108?brand=Dell&price_range=840-above
+ 
