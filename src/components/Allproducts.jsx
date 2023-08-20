@@ -33,15 +33,16 @@ function AllProducts() {
   const [displayTypeProducts, setDisplayTypeProducts] = useState('laptopuri');
 
   const filterAvailability = ['In stoc', 'Stoc epuizat', 'Noutati', 'Promotii'];
-  const filterColorsList = [{color: 'black', roColor: 'negru'},{color: 'silver', roColor: 'argintiu'},{color: '#e9d0ae', roColor: 'sand'},{color: '#8eadac', roColor: 'fogblue'}];
-  const filterBrandsList = ['Asus','Benq', 'Acer', 'Hama', 'Desq', 'Apple'];
+  const filterColorsList = [{color: 'black', roColor: 'negru'},{color: 'white', roColor: 'white'},{color: 'darkgray', roColor: 'darkgray'},{color: 'silver', roColor: 'argintiu'},{color: '#C3C7C7', roColor: 'puresilver'},{color: 'blue', roColor: 'blue'},{color: '#e9d0ae', roColor: 'sand'},{color: '#8eadac', roColor: 'fogblue'},{color: 'green', roColor: 'verde'},{color: 'pink', roColor: 'roz'}];
+  const [filterBrandsList, setFilterBrandsList] = useState([]);
   const filterProductsType = ['Laptopuri','Accesorii'];
 
 
   const [passingTags, setPassingTags] = useState({
-    brand: { 'Asus': false, 'Benq': false, 'Acer': false, 'Hama': false, 'Desq': false, 'Apple': false},
+    brand: {},
     availability: {'In stoc': false, 'Stop epuizat': false, 'Noutati': false, 'Promotii': false},
-    color: {'negru': false, 'argintiu': false, 'sand': false, 'fogblue': false},
+    // color: {'negru': false, 'argintiu': false, 'sand': false, 'fogblue': false},
+    color: {},
     productType: {'laptopuri': false,'accesorii': false}
   })
 
@@ -59,6 +60,59 @@ function AllProducts() {
  
   useEffect(() => {
     setPureProductsList(productsContext);
+    
+    let brandsList = [];
+    // get brands list from all products
+    for(let productBrand of productsContext) {
+        if(productBrand.productType === 'laptopuri') {
+          let prodBrandLowerCase = productBrand.brand.toLowerCase();
+          let prodBrandFormatedName = prodBrandLowerCase.charAt(0).toUpperCase() + prodBrandLowerCase.slice(1);
+          
+          if(!brandsList.includes(prodBrandFormatedName)) {
+            brandsList.push(prodBrandFormatedName);
+          }
+        }
+        setFilterBrandsList(brandsList);
+  
+    }
+
+    // collect colors list
+    let colorsList = [];
+    for(let color of filterColorsList) {
+      colorsList.push(color.roColor);
+    }
+
+    let newColors = {};
+    for(let color of colorsList) {
+   newColors[color] = false;
+       
+    }
+
+
+    // collect and pass to passingTags the brands list
+    const newBrandObject = {};
+    for (let brand of brandsList) {
+      newBrandObject[brand] = false;
+    }
+
+      // Update the state with the new brand object
+      setPassingTags(prevTags => ({
+        ...prevTags,
+        brand: newBrandObject,
+        color: newColors
+      }));
+
+
+ 
+
+    setTimeout(() => {
+    // Get filter products number (to be displayed on the right of filter name)
+      getFilterProductsNumber();
+    }, 2000);
+
+    // for(let i =0; i < productsContext.length;i++) {
+    //   console.log(productsContext[i].brand);
+    //  }
     // Add listener for filter titles - show / hide
    let filterTitles = document.querySelectorAll('.ap-filbox-title');
    filterTitles.forEach(el => el.addEventListener('click', showHideFilterBox));
@@ -68,8 +122,7 @@ function AllProducts() {
    // Select default sort by option value on render
    document.querySelector('.sortby-op-val-default').setAttribute('selected', 'selected');
 
-   // Get filter products number (to be displayed on the right of filter name)
-   getFilterProductsNumber();
+ 
 
     // // Hide loading, show filtered products
     setTimeout(() => {
@@ -160,6 +213,21 @@ function AllProducts() {
     }, 100);
   }
 
+  // Use this to render a loading spinner by passing the filter type
+const renderLoading = (type) => {
+  let spinner = `<div class="spinner-border text-warning" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>`;
+  let newCls = '.loading-allprod-filter'+'-'+type;
+  document.querySelector(newCls).innerHTML = spinner;
+  document.querySelector(newCls).classList.add('d-flex');
+  // hide loading spinner
+  setTimeout(() => {
+    document.querySelectorAll('.loading-allprod-filter .spinner-border').forEach(el => el.remove());
+    document.querySelectorAll('.loading-allprod-filter').forEach(el => el.classList.remove('d-flex'));
+  }, 700);
+}
+
   // PRICE RANGER
   const filterPriceRangeChange = (e) => {
     setFilterRanger(e.target.value);
@@ -168,6 +236,7 @@ function AllProducts() {
   }
 
   const filterPriceRangeMouseUp = () => {
+    renderLoading('price');
     updateFilterInputPrice();
     setPriceRangerReleasedClick(true);
   }
@@ -227,16 +296,20 @@ const updateFilterInputPrice = (passedProducts) => {
     }
 }
 
+
+
 // PRODUCT TYPE FILTER
 const productsTypeCheckbox = (el) => {
+  renderLoading('producttype');
   setFilter('productType', el.toLowerCase());
 }
 
+
 // COLOR FILTER
 const filterByColor = (e,el) => {
+  renderLoading('color');
   e.target.classList.toggle('highlight-color');
   setFilter('color', el);
-
 }
 
 const addToFilteredTerms = (value, filterType) => {
@@ -257,11 +330,13 @@ const addToFilteredTerms = (value, filterType) => {
 
 // AVAILABILITY FILTERS
 const availabilityCheckbox = (value, e) => {
+  renderLoading('availability');
   setFilter('availability', value);
 }
 
 // BRAND FILTERS
 const brandCheckbox = (brand,e) => {
+  renderLoading('brand');
   // When brand box is checked/unchecked, by passing 'brand' type and brand value
   setFilter('brand',brand);
 }
@@ -285,10 +360,14 @@ const selectedProductsView = (e,type) => {
       el.classList.add('allprod-thumb-list')
     });
     // List align for product items
-    document.querySelectorAll('.allprod-wrpdwrap-proditem').forEach(el => {
-      el.classList.remove('allprod-wrpdwrap-proditem-grid');
-      el.classList.add('appprod-proditem-list-view');
+    let elements = document.querySelectorAll('.allprod-wrpdwrap-proditem');
+    elements.forEach(el => {
+      // el.classList.remove('allprod-wrpdwrap-proditem-grid');
+      // el.classList.add('appprod-proditem-list-view');
     });
+    for(let i=0; i<elements.length; i++) {
+      elements[i].classList.remove('allprod-wrpdwrap-proditem-grid');
+    }
   } else {
     setViewProductsMode('grid');
       // New style for product list item
@@ -309,7 +388,6 @@ useEffect(() => {
   if(!filteredTerms.length > 0 ) {
     sortBy();
   } else if(filteredTerms.length > 0) {
-    console.log('called');
     sortBy(pureProductsList);
   }
 },[sortByOption])
@@ -357,7 +435,6 @@ const sortBy = (prods) =>  {
 }
 
 const setFilter = (filterType, value) => {
-
   // Add loading effect style to every product before applying the filters
   setDisplayFilteredProducts(false);
 
@@ -516,7 +593,6 @@ const clearAllFilters = () => {
 }
 
 const toggleMobileFilterMenu = () => {
-  console.log('loaded');
   document.querySelector('.allprod-filters-cont').classList.toggle('open-mob-filter');
   document.getElementsByTagName('body')[0].classList.toggle('lock-scroll');
   document.documentElement.classList.toggle('lock-scroll');
@@ -558,50 +634,68 @@ const toggleMobileSortMenu = () => {
 
 // GET FILTER PRODUCTS NUMBER
 const getFilterProductsNumber = () => {
- let filteredTerms = ['productType','availability','brand'];
- 
-let values = [];
+  let filteredTerms = ['productType', 'availability', 'brand'];
 
-    filteredTerms.forEach(el => {
-      for(let i=0; i<productsContext.length;i++) {
-        let filterValue = productsContext[i][el];
- 
-        if(filterValue) {
-          const exists = values.find(el => el.type === filterValue.toLowerCase());
-          if(!exists) {
-          let obj = {type: filterValue.toLowerCase(), value: 1};
-          values.push(obj);
-          } 
-          if(exists) {
-            for(let z =0; z < values.length; z++) {
-              if(values[z].type === filterValue.toLowerCase()) {
-                values[z].value = values[z].value + 1; 
+  let values = [];
+
+  filteredTerms.forEach(el => {
+    for (let i = 0; i < productsContext.length; i++) {
+      let filterValue = productsContext[i][el];
+
+      if (Array.isArray(filterValue)) {
+        filterValue.forEach(value => {
+          let normalizedValue = value.toLowerCase();
+
+          const exists = values.find(el => el.type === normalizedValue);
+          if (!exists) {
+            let obj = { type: normalizedValue, value: 1 };
+            values.push(obj);
+          } else {
+            for (let z = 0; z < values.length; z++) {
+              if (values[z].type === normalizedValue) {
+                values[z].value = values[z].value + 1;
               }
+            }
+          }
+        });
+      } else if (filterValue) {
+        let normalizedValue = filterValue.toLowerCase();
+
+        const exists = values.find(el => el.type === normalizedValue);
+        if (!exists) {
+          let obj = { type: normalizedValue, value: 1 };
+          values.push(obj);
+        } else {
+          for (let z = 0; z < values.length; z++) {
+            if (values[z].type === normalizedValue) {
+              values[z].value = values[z].value + 1;
             }
           }
         }
       }
-    })
+    }
+  });
 
 
 
-let formGroupFilterNames = [];
-let formGroupCheckboxes = document.querySelectorAll('.filter-checkbox-inp');
-formGroupCheckboxes.forEach(el => {
-  formGroupFilterNames.push(el.getAttribute('data-filter-type').toLowerCase());
-});
-
-for (let c = 0; c < values.length; c++) {
-  if (formGroupFilterNames.includes(values[c].type)) {
-    let sp = document.createElement('span');
-    let value = document.createTextNode('('+values[c].value+')');
-    sp.appendChild(value);
-    let targetElement = document.querySelector('[data-filter-type="' + values[c].type + '"]');
-    if (!targetElement.querySelector('span')) {
-      targetElement.appendChild(sp);
+  let formGroupFilterNames = [];
+  let formGroupCheckboxes = document.querySelectorAll('.filter-checkbox-inp');
+  formGroupCheckboxes.forEach(el => {
+    formGroupFilterNames.push(el.getAttribute('data-filter-type').toLowerCase());
+  });
+  for (let c = 0; c < values.length; c++) {
+    
+    if (formGroupFilterNames.includes(values[c].type)) {
+      
+      let sp = document.createElement('span');
+      let value = document.createTextNode('('+values[c].value+')');
+      sp.appendChild(value);
+      let targetElement = document.querySelector('[data-filter-type="' + values[c].type + '"]');
+      if (!targetElement.querySelector('span')) {
+        targetElement.appendChild(sp);
+      }
     }
   }
-}
 
 }
 
@@ -647,6 +741,7 @@ const higherThan = '<';
               {displayFilteredTerms()}
 
               <div className='allprod-filter-box'>
+                <span className="loading-allprod-filter loading-allprod-filter-producttype"></span>
                 <span className='ap-filbox-title'>Tip produs<span><i className="fa-solid fa-angle-right"></i></span></span>
                 <div className='allprod-fbox-wrap'>
                   <div className='allprod-fbox-prodType'>
@@ -661,6 +756,7 @@ const higherThan = '<';
               </div>
 
               <div className='allprod-filter-box'>
+              <span className="loading-allprod-filter loading-allprod-filter-price"></span>
                 <span className='ap-filbox-title'>Pret<span><i className="fa-solid fa-angle-right"></i></span></span>
                 <div className='allprod-fbox-wrap hide-filter-box'>
                   <input 
@@ -685,6 +781,7 @@ const higherThan = '<';
 
 
               <div className='allprod-filter-box'>
+              <span className="loading-allprod-filter loading-allprod-filter-color"></span>
                 <span className='ap-filbox-title'>Culoare<span><i className="fa-solid fa-angle-right"></i></span></span>
                 <div className='allprod-fbox-wrap allprod-fbox-wrapcolor'>
                   <div className='allprod-box-wrapcolor'>
@@ -701,6 +798,7 @@ const higherThan = '<';
               </div>
 
               <div className='allprod-filter-box'>
+              <span className="loading-allprod-filter loading-allprod-filter-availability"></span>
                 <span className='ap-filbox-title'>Disponibilitate<span><i className="fa-solid fa-angle-right"></i></span></span>
                 <div className='allprod-fbox-wrap'>
                   <div className='allprod-fbox-availability'>
@@ -715,10 +813,11 @@ const higherThan = '<';
               </div>
 
               <div className='allprod-filter-box'>
+              <span className="loading-allprod-filter loading-allprod-filter-brand"></span>
                 <span className='ap-filbox-title'>Brand<span><i className="fa-solid fa-angle-right"></i></span></span>
                 <div className='allprod-fbox-wrap'>
                   <div className='allprod-fbox-brand'>
-                    {filterBrandsList.map((el,ind) =>
+                    {filterBrandsList && filterBrandsList.map((el,ind) =>
                     <div className="form-group filter-checkbox-inp" key={ind} data-filter-type={el.toLowerCase()} >
                       <input type="checkbox" id={el} className='filter-brand-checkbox' onClick={(e) => brandCheckbox(el,e)}/>
                       <label htmlFor={el}>{el}</label>

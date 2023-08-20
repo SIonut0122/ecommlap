@@ -157,7 +157,7 @@ function Header( ) {
                                 {resultedSearchedList.map((el,index) => 
                                      <li key={index} className='navsearch-bar-list-item' onClick={(e) => closeSearchList(el)}>
                                      <Link to={`/viewproduct/${el.id}`}>
-                                     <img src={`../images/${el.img}`} alt=''/>
+                                     <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${el.id}/1.jpg`} alt=''/>
                                          <p>{el.title}</p>
                                      </Link>
                                  </li>

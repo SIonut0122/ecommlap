@@ -136,6 +136,8 @@ const getRecommendedProducts = () => {
 
                         {recProducts.length && recProducts.map((item,index) => 
                             <div className="atc-recom-item" key={item.id}>
+                            {item.oldPrice > 0 ? ( <span className="allprod-badge-offer">Super pret</span> ) : ("")}
+
                                 <div className="allprod-thumb-fav">
                                 {!item.addedToFav ? (
                                   <AddToFavorites 
@@ -152,7 +154,7 @@ const getRecommendedProducts = () => {
                                 )} 
                                 </div>
                                 <Link to={`/viewproduct/${item.id}`} onClick={() => viewRecomProduct(item)} className="displayaddedtocart-img-recom">
-                                <img src={`../../images/${item.img}`} alt={item.title}/>
+                                <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${item.id}/1.jpg`} alt={item.title}/>
                                 </Link>
                                 <div className="atc-recom-box-title-wrap">
                                     <Link to={`/viewproduct/${item.id}`} className="atc-recom-box-title" onClick={() => viewRecomProduct(item)}>{item.title}</Link>
@@ -176,7 +178,7 @@ const getRecommendedProducts = () => {
                                         </span>
                                     </Link>
                                 <div className="atc-recom-box-price">
-                                    <span>{item.price}lei</span>
+                                    <span>{item.price}lei {item.oldPrice > 0 ? <span className="atcrecombox-price-offer">{item.oldPrice} lei</span> : ""}</span>
                                     <Link to={`/viewproduct/${item.id}`} onClick={() => viewRecomProduct(item)}>Detalii</Link>
                                 </div>
                             </div>

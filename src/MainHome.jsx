@@ -45,6 +45,16 @@ function MainHome() {
 
 
   useEffect(() => {
+    // function shuffleArray(array) {
+    //   console.log('called');
+    //   for (let i = array.length - 1; i > 0; i--) {
+    //     const j = Math.floor(Math.random() * (i + 1));
+    //     [array[i], array[j]] = [array[j], array[i]];
+    //   }
+    // }
+
+    
+
     // Check localStorage
     // cart
     if(localStorage.getItem('cart') !== null && localStorage.getItem('cart').length > 0) {

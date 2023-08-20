@@ -328,9 +328,7 @@
     @include displayFlex();
     flex-direction: column;
     justify-content: flex-start;
-
     margin-top:100px;
-    border:solid red;
 
     button, span {
         max-width: 100%;
@@ -590,6 +588,7 @@
      
             font-size: 15px;
             font-weight: bold;
+ 
     }
     a {
         color: #fff;
@@ -603,6 +602,11 @@
             color: #fff;
         }
     } 
+    .atcrecombox-price-offer {
+        color: red;
+        font-size: 14px;
+        text-decoration: line-through;
+    }
 }
 .prodinfo-infobottom-nav {
     width: 100%;

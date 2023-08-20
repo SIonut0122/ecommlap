@@ -13,25 +13,34 @@ function Items({ currentItems }) {
   const {displayFilteredProducts} = useContext(MainContext);
   const { pureProductsList, setPureProductsList } = useContext(MainContext);
 
-  const handleMouseOver = (el) => {
-    let elId = el.target.getAttribute('data-el-id');
 
-    setTimeout(() => {
+  let timeoutId;
+  const handleMouseOver = (el) => {
+    // get product id
+    let elId = el.target.getAttribute('data-el-id');
+    //on hover, after 3milisec change the product
+    timeoutId = setTimeout(() => {
       let elImg = document.querySelector(`[data-el-id="${elId}"]`);
       if (elImg) {
         elImg.src = `https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${elId}/2.jpg`;
       }
     }, 300);
   }
+  useEffect(() => {
+    console.log('loaded');
+  },[]);
 
   const handleMouseOut = () => { 
-    let productImgs = document.querySelectorAll('.allprod-img-head');
-    
-    for(let i=0; i <= pureProductsList.length; i++) {
-    let elImg = document.querySelector(`[data-el-id="${pureProductsList[i].id}"]`);
-    if (elImg) {
-      elImg.src = `https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${pureProductsList[i].id}/1.jpg`;
-    }
+    clearTimeout(timeoutId);
+
+    for(let i=0; i < pureProductsList.length; i++) {
+      // get the product id
+      let prodId = pureProductsList[i].id;
+      // set default image by using the product id to target the folder images
+      let elImg = document.querySelector(`[data-el-id="${prodId}"]`);
+      if (elImg) {
+        elImg.src = `https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${prodId}/1.jpg`;
+      }
     }
   
   }
@@ -46,6 +55,7 @@ function Items({ currentItems }) {
               key={el.id}
                >
                         <div className='allprod-product-thumb'>
+                        {el.oldPrice > 0 ? ( <span className="allprod-badge-offer">Super pret</span> ) : ("")}
                         <span className="allprod-thumb-fav">
                                   {!el.addedToFav ? (
                                     <AddToFavorites iclassname='allprod-addfav-false atcrecom-addfav-false' addToFavTxt='' addedProductToFav={el}/>
@@ -75,7 +85,7 @@ function Items({ currentItems }) {
                                   <p>{el.rating}</p>
                                   <p>(3)</p>
                               </span>
-                              <span className='allprod-cap-prodprice'>{el.price} lei</span>
+                              <div className='allprod-cap-prodprice'>{el.price} lei {el.oldPrice > 0 ? <span>{el.oldPrice} lei</span> : ""}</div>
                               <div className='allprod-cap-prodactions'>
                                   
                                 {/* Addedproduct - for cart / setCurrentAddedToCart - for AddedToCartDisplay */}
@@ -101,17 +111,10 @@ function PaginatedItems({ itemsPerPage }) {
 
   const [itemOffset, setItemOffset] = useState(0);
 
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
 
   // Simulate fetching items from another resources.
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
-  const shuffledArray = shuffleArray(pureProductsList);
   const endOffset = Math.min(itemOffset + itemsPerPage, pureProductsList.length);
   const currentItems = pureProductsList.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(pureProductsList.length / itemsPerPage);

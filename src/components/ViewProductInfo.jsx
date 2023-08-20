@@ -110,6 +110,7 @@ let discountPercentage = () => {
 
           <div className='productinfo-wrapper'>
             <section className='prodinfo-wrp-col-one'>
+            <span className="allprod-badge-offer">Super pret</span>
               <Carousel showArrows={0} emulateTouch={1} showIndicators={0} showStatus={0}>
                   <div>
                   <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${selectedProduct.id}/1.jpg`} alt={selectedProduct.title}/>
