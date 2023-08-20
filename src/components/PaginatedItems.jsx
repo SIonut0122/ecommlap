@@ -11,17 +11,40 @@ import ReactPaginate from 'react-paginate';
 
 function Items({ currentItems }) {
   const {displayFilteredProducts} = useContext(MainContext);
-  
+  const { pureProductsList, setPureProductsList } = useContext(MainContext);
 
+  const handleMouseOver = (el) => {
+    let elId = el.target.getAttribute('data-el-id');
+
+    setTimeout(() => {
+      let elImg = document.querySelector(`[data-el-id="${elId}"]`);
+      if (elImg) {
+        elImg.src = `https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${elId}/2.jpg`;
+      }
+    }, 300);
+  }
+
+  const handleMouseOut = () => { 
+    let productImgs = document.querySelectorAll('.allprod-img-head');
+    
+    for(let i=0; i <= pureProductsList.length; i++) {
+    let elImg = document.querySelector(`[data-el-id="${pureProductsList[i].id}"]`);
+    if (elImg) {
+      elImg.src = `https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${pureProductsList[i].id}/1.jpg`;
+    }
+    }
+  
+  }
 
   return (
     <>
       {currentItems.length > 0 ? (
         <>
           {currentItems.map((el,ind) => 
-              <div className='allprod-wrpdwrap-proditem allprod-wrpdwrap-proditem-grid' 
+              <div className='allprod-wrpdwrap-proditem allprod-wrpdwrap-proditem-grid'
               style={{opacity: !displayFilteredProducts ? '0.5': '1', pointerEvents: !displayFilteredProducts ? 'none': 'visible'}}
-              key={el.id}>
+              key={el.id}
+               >
                         <div className='allprod-product-thumb'>
                         <span className="allprod-thumb-fav">
                                   {!el.addedToFav ? (
@@ -32,11 +55,15 @@ function Items({ currentItems }) {
                                 </span>
                           <div className="allprod-imgehead-wrp">
                             <Link to={`/viewproduct/${el.id}`}>
-                              <img className='allprod-img-head' src={`images/${el.img}`} alt=''/>
+                              <img className='allprod-img-head' 
+                              src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${el.id}/1.jpg`} alt=''
+                              data-el-id={el.id}
+                              onMouseOver={(e) => handleMouseOver(e)}
+                              onMouseLeave={handleMouseOut}
+                              />
                             </Link>
                           </div>
                           <div className='allprod-prodthub-caption'>
-                              {/* <span className='allprod-cap-brandname'><span>{el.brand}</span><span>{el.color}</span></span> */}
                               <span className='allprod-cap-prodtitle'>{el.title}</span>
                               <span className="allprod-cap-rating-wrapper">
                                 <ReactStars
@@ -45,7 +72,7 @@ function Items({ currentItems }) {
                                   count={5}
                                   activeColor="#ffd700"
                                   />
-                                  <p>2.5</p>
+                                  <p>{el.rating}</p>
                                   <p>(3)</p>
                               </span>
                               <span className='allprod-cap-prodprice'>{el.price} lei</span>
@@ -72,14 +99,19 @@ function Items({ currentItems }) {
 function PaginatedItems({ itemsPerPage }) {
     const { pureProductsList, setPureProductsList } = useContext(MainContext);
 
-  
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
 
   // Simulate fetching items from another resources.
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
+  const shuffledArray = shuffleArray(pureProductsList);
   const endOffset = Math.min(itemOffset + itemsPerPage, pureProductsList.length);
   const currentItems = pureProductsList.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(pureProductsList.length / itemsPerPage);

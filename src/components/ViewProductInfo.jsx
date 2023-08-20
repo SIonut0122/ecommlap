@@ -106,19 +106,22 @@ let discountPercentage = () => {
             <span><Link to={'/products'}>Produse</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></span>
             <span>Cod produs: {selectedProduct.modelNo}</span>
           </div>
-          <div className='productinfo-wrp-prodtitle'><h4>{selectedProduct.id} - {selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
+          <div className='productinfo-wrp-prodtitle'><h4>{selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
 
           <div className='productinfo-wrapper'>
             <section className='prodinfo-wrp-col-one'>
               <Carousel showArrows={0} emulateTouch={1} showIndicators={0} showStatus={0}>
                   <div>
-                  <img src={`../../images/${selectedProduct.img}`} alt={selectedProduct.title}/>
+                  <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${selectedProduct.id}/1.jpg`} alt={selectedProduct.title}/>
                   </div>
                   <div>
-                  <img src={`../../images/${selectedProduct.img}`} alt={selectedProduct.title}/>
+                  <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${selectedProduct.id}/2.jpg`} alt={selectedProduct.title}/>
                   </div>
                   <div>
-                  <img src={`../../images/${selectedProduct.img}`} alt={selectedProduct.title}/>
+                  <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${selectedProduct.id}/3.jpg`} alt={selectedProduct.title}/>
+                  </div>
+                  <div>
+                  <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${selectedProduct.id}/4.jpg`} alt={selectedProduct.title}/>
                   </div>
               </Carousel>
             </section>
