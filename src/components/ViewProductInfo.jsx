@@ -29,6 +29,7 @@ function ViewProductInfo( ) {
   const [isPriceAlert, setIsPriceAlert] = useState(false);
   const { cartContext, setCartContext } = useContext(MainContext);
   const { displayAddedToCartMsg, setDisplayAddedToCartMsg } = useContext(MainContext);
+  const [selProductUpdated, setSelProductUpdated] = useState(false);
 
 
   useEffect(() => {
@@ -43,6 +44,12 @@ function ViewProductInfo( ) {
     }
   }, [])
 
+  useEffect(() => {
+    if(selectedProduct) {
+      setSelProductUpdated(true);
+    }
+  }, [selectedProduct])
+
   const checkItemAlertPrice = () => {
     if(localStorage.getItem('priceAlertList') !== null && localStorage.getItem('priceAlertList').length > 0) {
       let alertProducts = [...JSON.parse(localStorage.getItem('priceAlertList'))];
@@ -51,7 +58,6 @@ function ViewProductInfo( ) {
        setIsPriceAlert(true);
       }
     }
-    console.log('asgagas');
   }
 
   useEffect(() => {
@@ -104,14 +110,14 @@ let discountPercentage = () => {
                 <div className='productinfo-container container'>
           <div className='productinfo-wrp-prodhref'>
             <span><Link to={'/products'}>Produse</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></span>
-            <span>Cod produs: {selectedProduct.modelNo}</span>
+            <p>Cod produs: {selectedProduct.modelNo}</p>
           </div>
           <div className='productinfo-wrp-prodtitle'><h4>{selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
 
           <div className='productinfo-wrapper'>
             <section className='prodinfo-wrp-col-one'>
             <span className="allprod-badge-offer">Super pret</span>
-              <Carousel showArrows={0} emulateTouch={1} showIndicators={0} showStatus={0}>
+            <Carousel showArrows={false} emulateTouch={true} showIndicators={false} showStatus={false}>
                   <div>
                   <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${selectedProduct.id}/1.jpg`} alt={selectedProduct.title}/>
                   </div>
@@ -238,7 +244,9 @@ let discountPercentage = () => {
             
         </div>
             <div className="container-fluid">
-              <ProductInfoBottom />
+              {selProductUpdated && (
+                <ProductInfoBottom productInfo={selectedProduct}/>
+              )}
             </div>
     </div>  
   );

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 
-function ProductInfoBottom() {
+function ProductInfoBottom(props) {
 
     const [displayDescription, setDisplayDescription] = useState(true);
     const [displaySpecs, setDisplaySpecs] = useState(false);
     const [displayReviews, setDisplayReviews] = useState(false);
+    const [productInfo,setProductInfo] = useState(props.productInfo);
 
     useEffect(() => {
+    
         let decrNavTypes = document.querySelectorAll('.prodinfo-inav-btn');
         decrNavTypes.forEach(el => el.addEventListener('click', (e) => toggleBottomDescr(e)));
+        console.log(productInfo);
     },[])
 
         
@@ -49,10 +52,27 @@ function ProductInfoBottom() {
             </div>
             <div className="prodinfo-infobottom-cont container">
                 {displayDescription && (
-                    <div>Descriere</div>
+                      <>
+                        {productInfo.info && (
+                            productInfo.info.map((el,index) =>
+                                <p className="prodinfo-el" key={index}><i className="bi bi-arrow-right-square-fill"></i> {el}</p>
+                            )
+                        )}
+                      </>
                 )}
                  {displaySpecs && (
-                    <div>Specificatii</div>
+                    <>
+                      {productInfo.specs && (
+                        <>
+                            {Object.entries(productInfo.specs).map(([key,value]) => (
+                               <p className="prodinfo-specs-item" key={key}>
+                                <span className="prodinfospec-key">{key}:</span> 
+                                <span className="prodinfospec-value">{value}</span>
+                               </p>
+                            ))}
+                        </>
+                      )}
+                    </>
                 )}
                  {displayReviews && (
                     <div>Reviews</div>

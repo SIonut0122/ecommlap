@@ -182,8 +182,18 @@
         font-family: RobotoBold;
         font-size:17px;
         transition: 0.2s color;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        color: #000;
+
+  
+      line-clamp: 2;
         &:hover {
-            color: #000;
+            color: rgba(0,0,0,0.7);
         }
     }
  

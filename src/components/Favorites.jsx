@@ -64,7 +64,7 @@ function Favorites( ) {
                             </span>
 
                           <Link to={`/viewproduct/${el.id}`}>
-                            <img src={`../../images/${el.img}`} alt={el.title}/>
+                            <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${el.id}/1.jpg`} alt={el.title}/>
                           </Link>
 
                           <div className='fav-card-content'>

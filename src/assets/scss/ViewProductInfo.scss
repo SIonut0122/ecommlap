@@ -61,9 +61,16 @@
     display: flex;
     justify-content: space-between;
 
-    a {
+    span {
         color:#8b8b8b;
         transition: color 0.1s;
+    }
+    
+    p {
+        font-size: 13px;
+        margin-left: 20px;
+        text-align: right;
+     
     }
 }
 .productinfo-wrp-prodtitle {
@@ -93,9 +100,19 @@
 
         .thumbs-wrapper {
             @include displayFlex();
-
+            flex-direction: row;
+            
+            .thumbs {
+                @include displayFlex();
+            }
             .thumb {
                 border:1px solid var(--bs-orange);
+                min-width: 80px;
+                min-height: 80px;
+                margin:5px;
+                @include displayFlex;
+
+                
                 img {
                     max-width: 100%;
                     max-width: 80px;
@@ -106,6 +123,14 @@
                     border:1px solid var(--bs-orange-hover);
                 }
             }
+        }
+    }
+}
+.slider-wrapper {
+    .slider {
+        .slide {
+            display: flex;
+            @include displayFlex;
         }
     }
 }
@@ -277,8 +302,7 @@
 
 .prodinfo-wrpcoltwo-moreinfo {
     padding: 3px 5px;
-    border-radius: 5px;
-    border:1px solid lightgray;
+    border-bottom:1px solid lightgray;
    display: flex;
    align-items: flex-start;
    justify-content: center;
@@ -653,6 +677,39 @@
     padding:25px 15px 25px 15px;
     min-height: 300px;
     @include displayFlexColumn;
+
+    .prodinfo-el {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        margin-bottom: 10px;
+
+        i {
+            color: var(--bs-darkgray);
+        }
+
+    }
+    .prodinfo-specs-item {
+       width: 100%;
+       @include displayFlex();
+       justify-content: flex-start;
+
+       &:nth-child(even) {
+        background-color:  rgba(255,255,255,0.1);
+       }
+      
+    }
+    .prodinfospec-key {
+        font-weight: bold;
+        font-size: 17px;
+        min-width: 400px;
+        @include displayFlex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 3px;
+    }
+    .prodinfospec-value {
+        font-size: 15px;
+        padding: 3px;
+    }
 }
 
 @media (max-width: 1399.98px) {  }

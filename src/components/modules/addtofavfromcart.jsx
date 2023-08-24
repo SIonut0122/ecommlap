@@ -22,8 +22,10 @@ function AddToFavFromCart(props) {
            break;
          }
         }
+ 
         // If product was not found, add it to the cart
          if(!prodFound) {
+          fav.addedToFav = true;
             setFavoritesContext(oldFav => [...oldFav, fav]);
 
             // Display 'Added to fav' message
@@ -35,6 +37,8 @@ function AddToFavFromCart(props) {
 
     const removeFromCart = (removed = props.removedCartProduct) => {
         setCartContext(oldCart => oldCart.filter(el => el.id !== removed.id));
+        let newCart = cartContext.filter(el => el.id !== removed.id);
+        localStorage.setItem('cart', JSON.stringify(newCart));
     }
 
 

@@ -18,7 +18,7 @@ const products = [
         "Intimitate la îndemâna dvs.: Păstrați-vă intimitatea intactă cu un obturator fizic pentru camera dvs. web, pentru liniștea sufletească de care aveți nevoie atunci când aveți nevoie.",
         "Distracție mare într-un design subțire și ușor: Experimentați divertismentul ca niciodată înainte pe dispozitive subțiri și ușoare, alimentate de un procesor Intel Core cu grafică integrată Intel UHD.",
         "Lucrați și jucați de oriunde: O cameră încorporată de 720p cu un microfon dublu și o baterie care durează până la 7,5 ore vă oferă libertatea de a lucra sau juca unde doriți, când doriți."],
-      laptopSpecs: {
+      specs: {
         "Standing screen display size": "14 inch",
         "Screen Resolution": "1920 x 1080 pixeli",
         "Max Screen Resolution": "1920 x 1080 pixeli",
