@@ -36,8 +36,8 @@ function AddToCartBtn(props) {
       // (the cause may be the multiple times rendering ( x Product item ))
       localStorage.setItem('cart', JSON.stringify(cart));
       
-
      } else {
+      setCurrentAddedToCart(product);
        console.log('prod was found');
 
        // Increase quantity and totalAmount of product if found

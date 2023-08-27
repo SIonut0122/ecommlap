@@ -9,6 +9,18 @@ function Contact( ) {
   // Set title
   document.title = 'Contacteaza-ne';
   },[])
+
+  const submitContactForm = (e) => {
+    // prevent submit
+    e.preventDefault();
+    
+    // reset form and display success msg
+    e.target.reset();
+    let successMsg = document.getElementById('contact-msg-success');
+
+    successMsg.classList.remove('d-none');
+    successMsg.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest"});
+  } 
   
   return (
         <div className='contact-container'>
@@ -86,29 +98,55 @@ function Contact( ) {
                 </div>
                 </div>
 
-                <div className="contact-cwrp-mid">
-                  <div class="mb-3">
-                    <label for="contact-name" class="form-label">Nume si prenume *</label>
-                    <input type="text" class="form-control" id="contact-name" placeholder=""/>
+                <form method="POST" className="contact-cwrp-mid" onSubmit={(e) => submitContactForm(e)}>
+                  <div className="mb-3">
+                    <label htmlFor="contact-name" className="form-label">Nume si prenume *</label>
+                    <input type="text" className="form-control" id="contact-name" placeholder=""/>
                   </div>
-                  <div class="mb-3">
-                    <label for="contact-phone" class="form-label">Telefon</label>
-                    <input type="text" class="form-control" id="contact-phone" placeholder=""/>
+                  <div className="mb-3">
+                    <label htmlFor="contact-phone" className="form-label">Telefon</label>
+                    <input type="text" className="form-control" id="contact-phone" placeholder=""/>
                   </div>
-                  <div class="mb-3">
-                    <label for="contact-email" class="form-label">Email *</label>
-                    <input type="text" class="form-control" id="contact-email" placeholder=""/>
+                  <div className="mb-3">
+                    <label htmlFor="contact-email" className="form-label">Email *</label>
+                    <input type="text" className="form-control" id="contact-email" placeholder=""/>
                   </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Mesaj *</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <div className="mb-3">
+                    <label htmlFor="exampleFormControlTextarea1" className="form-label">Mesaj *</label>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                   </div>
                   <div className="contact-mid-wrpbtn">
-                    <button class="btn" type="submit">Trimite</button>
+                    <button className="btn" type="submit">Trimite</button>
                   </div>
-                </div>
 
-                <div className="contact-cwrp-right"></div>
+                  <p id="contact-msg-success" className="d-none">Mesajul a fost trimis! Multumim!</p>
+                </form>
+
+                <div className="contact-cwrp-right">
+                 <div className="contact-cwrpright-box">
+                  <p className="contact-cright-title">Call center</p>
+                  <p className="contact-cright-notitle">021 7686</p>
+                  <p className="contact-cright-smtitle">Disponibil in toate retelele (tarif normal)</p>
+                 </div>
+
+                 <div className="contact-cwrpright-box">
+                  <p className="contact-cright-notitle">021 639 8285</p>
+                  <p className="contact-cright-smtitle">Apelabil din orice retea, din tara si din strainatate (tarif normal)</p>
+                 </div>
+
+                 <div className="contact-cwrpright-box">
+                  <p className="contact-cright-title">Program call center</p>
+                  <p className="contact-cright-smtitle">Luni - Vineri: 08:00 – 21:00</p>
+                  <p className="contact-cright-smtitle">Sambata: 08:00 – 17:00</p>
+                  <p className="contact-cright-smtitle">Duminica: Indisponibil</p>
+                 </div>
+
+                 <div className="contact-cwrpright-box">
+                  <p className="contact-cright-title">Sediu central</p>
+                  <p className="contact-cright-smtitle">Soseaua Bucuresti-Nord, Nr. 10, Corp O1, Voluntari, Judetul Ilfov</p>
+                 </div>
+
+                </div>
             </div>
           </div>
         </div>

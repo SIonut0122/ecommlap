@@ -539,6 +539,8 @@
     img {
         max-width: 100%;
         width: 180px;
+        height: 250px;
+        object-fit: contain;
     }
 
     .allprod-thumb-fav #atc-recom-id-false {
@@ -549,7 +551,10 @@
         background-image: url("../images/allproducts/fav-added.png") !important;
     }
     .displayaddedtocart-img-recom {
-        min-height: 190px;
+        width: 180px;
+        height: 250px;
+        display: flex;
+align-items: center;
  
     }
 }

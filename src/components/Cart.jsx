@@ -34,6 +34,8 @@ function Cart( ) {
 
   // Set title
   document.title = 'Cosul meu';
+
+ 
   }, [])
 
 
@@ -77,6 +79,14 @@ function Cart( ) {
     }, 1500);
   }
   
+  const displayTotalCartContext = () => {
+    if(cartTotalContext > 3000) {
+      return cartTotalContext;
+    } else {
+      return cartTotalContext + 19.99;
+    }
+  }
+  
   return (
         <div className='cart-container container'>
             <div id="addedto-alertview"></div>
@@ -89,7 +99,11 @@ function Cart( ) {
                           <div className="cart-wrp-top-list">
                             {cartContext.map(product =>
                                   <div className='cart-item' key={product.id}>
-                                  <img src="./images/acer.png" alt='' className='img-fluid'/>
+                                  <div className="cart-item-img-wrp">
+                                    <Link to={`/viewproduct/${product.id}`}>
+                                      <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${product.id}/1.jpg`} alt='' className='img-fluid'/>
+                                    </Link>
+                                  </div>
                                   <div className='cart-item-info'>
                                     <div className='cartitem-info-main'>
                                       <Link to={`/viewproduct/${product.id}`} title=''>{product.title}, {product.brand}, {product.modelNo}</Link>
@@ -125,16 +139,16 @@ function Cart( ) {
                                 <h4>Sumar comanda:</h4>
                                 <div className='cart-summary-row'>
                                   <div>Cost produse:</div>
-                                  <div>3000<span> lei</span></div>
+                                  <div>{cartTotalContext}<span> lei</span></div>
                                 </div>
                                 <div className='cart-summary-row'>
                                   <div>Cost livrare:</div>
-                                  <div>14.99<span> lei</span></div>
+                                  <div>{cartTotalContext > 3000 ? (<>0 <span>lei</span></>) : (<>19.99<span> lei</span></>)}</div>
                                 </div>
                                 <div className='cart-summary-total'>
                                     <div>
                                       <span>Total:</span>
-                                      <span>{cartTotalContext} lei</span>
+                                      <span>{displayTotalCartContext()} lei</span>
                                     </div>
                                 </div>
                                 <div className="cart-summ-checkout-wrp btn-org-btn">

@@ -31,10 +31,16 @@ function Header( ) {
     let typingTimer;
   
     const getSearchValue = (e) => {
+        
+        // if there is no value inside search input, clear resulted list
+        if(e.target.value.length < 1) {
+            setResultedSearchedList([]);
 
-        var currentURL = window.location.href;
-        var pathSegments = currentURL.split('/');
-        var lastPathSegment = pathSegments[pathSegments.length - 1];
+        }
+
+        let currentURL = window.location.href;
+        let pathSegments = currentURL.split('/');
+        let lastPathSegment = pathSegments[pathSegments.length - 1];
 
 
         setSearchValue(e.target.value);
@@ -49,9 +55,12 @@ function Header( ) {
             const filteredProducts = productsContext.filter(product =>
                 formatTerms.some(term => product.title.toLowerCase().includes(term))
             )
-           
+            
             document.querySelector('.head-searchnav-list').style.display = 'flex';
-            setResultedSearchedList(filteredProducts);
+            
+            if(e.target.value.length > 0) {
+                setResultedSearchedList(filteredProducts);
+            }
                 
 
             if(lastPathSegment !== 'products') {
@@ -62,6 +71,8 @@ function Header( ) {
                 }
             }
         }, 300);
+
+       
     }
 
     const displaySearchResults = () => {

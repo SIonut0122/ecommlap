@@ -37,43 +37,13 @@ const displayProductModalClick = () => {
 }
 
 const getRecommendedProducts = () => {
-    // let randomIds = [];
-    // let randomRecommProducts = [];
-
-    // // Loop throug productsContext length and get 4 random ids to and display them as recomanded products
-    // for (let i = 0; i < productsContext.length; i++) {
-    //     let randomId;
-    //     let randomNumber = Math.floor(Math.random() * productsContext.length) + 1;
-    //     if (randomIds.length === 0) {
-    //       randomIds.push(randomNumber);
-    //     } else {
-    //       if (randomIds.length <= 4 && !randomIds.includes(randomNumber)) {
-    //         randomIds.push(randomNumber);
-    //       }
-    //     }
-    //   }
-      
-
-    //   for (let i = 0; i < randomIds.length; i++) {
-    //     if (randomIds.includes(Number(productsContext[i].id))) {
-    //       randomRecommProducts.push(productsContext[i]);
-    //     }
-    //   }
-      
-
-    //     // Fisher-Yates (aka Knuth) shuffle
-    //     for (let i = randomRecommProducts.length - 1; i > 0; i--) {
-    //         const j = Math.floor(Math.random() * (i + 1));
-    //         [randomRecommProducts[i], randomRecommProducts[j]] = [randomRecommProducts[j], randomRecommProducts[i]];
-    //       }
-    //     setRecProducts(randomRecommProducts);
     let randomIds = [];
     let randomRecommProducts = [];
 
     // Loop through productsContext length and get 5 random ids to display them as recommended products
     while (randomIds.length <= 5) {
     let randomNumber = Math.floor(Math.random() * productsContext.length) + 1;
-    if (!randomIds.includes(randomNumber)) {
+    if (!randomIds.includes(randomNumber) && randomNumber !== addedProduct.id) {
         randomIds.push(randomNumber);
     }
     }

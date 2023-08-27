@@ -155,7 +155,7 @@
     top:110%;
     max-height: 270px;
     overflow-y: auto;
-    padding: 0 15px 0 5px;
+    padding: 0 10px 0 5px;
     background-color: #fff;
     display: flex;
     z-index: 1;
@@ -168,7 +168,7 @@
 
         li {
             width: 100%;
-            height: 100%;
+            height: 60px;
             display: flex;
             margin-bottom: 3px;
             background-color: #fff;
@@ -180,24 +180,27 @@
                 width: 100%;
                 min-height: 50px;
                 padding: 3px 5px;
+                align-items: center;
             }
 
             img {
                 display: flex;
-                height: 50px;
+                max-width: 100%;
                 width: 50px;
+                padding: 5px;
                 pointer-events: none;
             }
             p {
-                width: 100%;
-                padding: 0 5px;
-                font-size: 15px;
-                @include displayFlex();
-                justify-content: flex-start;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                overflow:hidden;
-                white-space:nowrap;
+                width: 100%;          
+                font-size: 14px;
+                max-height: 45px;
+                padding: 0 10px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-clamp:2;
+                -webkit-line-clamp: 2;
                 pointer-events: none;
             }
             .headsearch-li-preview {

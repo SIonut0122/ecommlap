@@ -198,7 +198,7 @@ let discountPercentage = () => {
                 <span className="prodinfo-wrpcoltwo-moreinfo-delivery">
                   <span>
                    <i className="bi bi-truck"></i>
-                   Livrare și retur gratuite de la 1500 lei
+                   Livrare și retur gratuite de la 6000 lei
                   </span>
                 </span>
               </div>

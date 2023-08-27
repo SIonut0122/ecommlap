@@ -17,6 +17,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 
 function MyAccount() {
@@ -24,6 +26,7 @@ function MyAccount() {
   const navigate = useNavigate();
   const { productsContext, setProductsContext } = useContext(MainContext);
   const [ storageAlertList, setStorageAlertList ] = useState([]);
+  const [ contactMobMenuOpened, setContactMobMenuOpened ] = useState(false);
   const [ priceAlertsList, setPriceAlertsList ] = useState([]);
   const { favoritesContext, setFavoritesContext } = useContext(MainContext);
   const [ displayAccountDataContainer , setDisplayAccountDataContainer ] = useState(true); 
@@ -88,14 +91,12 @@ function MyAccount() {
           setDisplayAddressContainer(true);
         break;
         case 'logout':
-          console.log('logout');
         break;
       default:
         return;
     }
   }
   const removeAlertPriceItem = (e) => {
-    console.log('remove');
     let priceAlertList = JSON.parse(localStorage.getItem('priceAlertList')) || [];
     setStorageAlertList(priceAlertList);
     let freshPriceIdsList = priceAlertList.filter(el => el !== e);
@@ -119,13 +120,34 @@ function MyAccount() {
   if(!isAuthenticated) {
     navigate('/login');
   }
+
+  const openMyAccMobMenu = () => {
+      if(!contactMobMenuOpened) {
+        setContactMobMenuOpened(true);
+      } else {
+        setContactMobMenuOpened(false);
+      }
+
+      document.querySelector('.contact-ullist-left').classList.toggle('hidemob-ul-list');
+
+  }
+
   return (
         <div className='myaccount-container'>
           <div className="container">
           <h4>Contul meu</h4>
           <div className="myaccount-cont-wrapper">
             <div className="myacc-cont-half-leftmenu">
-                <ul>
+                <div className="myacc-cotnhalf-left-mobhambmenu" onClick={openMyAccMobMenu}>
+          
+                  {!contactMobMenuOpened ? (
+                    <MenuIcon/>
+                  ): (
+                    <MenuOpenIcon/>
+                  )}
+
+                </div>
+                <ul className="contact-ullist-left hidemob-ul-list">
                   <li className="myacc-leftmenu-btn" data-myacc-nav='info' onClick={(e) => handleNabBtns(e)}><PersonOutlineOutlinedIcon /> Date personale</li>
                   <li className="myacc-leftmenu-btn" data-myacc-nav='orders' onClick={(e) => handleNabBtns(e)}><Inventory2OutlinedIcon/> Comenzile mele</li>
                   <li className="myacc-leftmenu-btn" data-myacc-nav='alerts' onClick={(e) => handleNabBtns(e)}><NotificationsActiveOutlinedIcon /> Alertele de pret</li>
@@ -238,10 +260,10 @@ function MyAccount() {
                        {priceAlertsList.map((el,index) => 
                                 <li key={index}>
                                 <Link to={`/viewproduct/${el.id}`}>
-                                  <img src={`../images/${el.img}`} alt=''/>
+                                  <img src={`https://raw.githubusercontent.com/SIonut0122/ecommlap/develop/images/products_images/${el.id}/1.jpg`} alt=''/>
                                     <p>{el.title}</p>
                                 </Link>
-                                <button type="button" data-id={el.id} onClick={(e) => removeAlertPriceItem(el.id)}>x</button>
+                                <button type="button" data-id={el.id} title='Elimina de la alerte' onClick={(e) => removeAlertPriceItem(el.id)}><i className="fa-solid fa-xmark"></i></button>
                             </li>
                           )}
                        </>

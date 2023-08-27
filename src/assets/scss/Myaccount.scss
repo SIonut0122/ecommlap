@@ -6,7 +6,7 @@
 
     .container {
         @include displayFlexColumn();
-        min-height: 500px;
+  
 
         h4 {
             width: 100%;
@@ -43,17 +43,38 @@
     padding: 10px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    @include displayFlexColumn;
+    align-items: flex-end;
 
-    ul {
+    .contact-ullist-left {
         list-style: none;
         margin:0;
         padding: 0;
+        width: 100%;
+        overflow: hidden;
+        max-height: 1000px;
+        transition: max-height 0.2s;
 
         li {
             display: flex;
             justify-content: flex-start;
             align-items: center;
             transition: color 0.2s;
+            min-height: 40px;
+            @include displayFlex();
+            align-items: flex-end;
+            justify-content: flex-start;
+            font-weight: bold;
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--bs-darklight);
+            cursor: pointer;
+            font-size: 15px;
+            @include disable-select();
+
+            &:nth-last-child(1) {
+                border-bottom: none;
+            }
+
 
             svg {
                 height: 20px;
@@ -71,20 +92,10 @@
         }
 
         li {
-            min-height: 40px;
-            @include displayFlex();
-            align-items: flex-end;
-            justify-content: flex-start;
-            font-weight: bold;
-            border-bottom: 1px solid var(--bs-darklight);
-            cursor: pointer;
-            font-size: 15px;
-
-            &:nth-last-child(1) {
-                border-bottom: none;
-            }
+          
         }
     }
+ 
 }
 
 .myacc-conthalfcont-userdetails-wrp {
@@ -97,7 +108,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    border:solid red;
 }
 
 .myacccont-cont-details {
@@ -160,7 +170,6 @@
 }
 .myacccont-activity-box {
     width: calc(100% / 3 - 15px);
-    border:1px solid red;
     @include displayFlex;
     align-items: flex-start;
 
@@ -170,14 +179,12 @@
         width: 100%;
         min-height: 120px;
         padding: 10px 0 0 5px;
-        border:1px solid green;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
         li {
             font-size: 15px;
-                border:1px solid red;
             a {
                 font-size: 14px;
             
@@ -225,13 +232,27 @@
         width: 100%;
         
         li {
-            width: 100%;
-            border:1px solid red;
+            width: 95%;
             min-height: 40px;
             margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-radius: 5px;
+            border:1px solid transparent;
+            border-bottom: 1px solid rgba(211, 211, 211, 0.2);
+            transition: border 0.2s;
+
+
+            &:hover {
+               border:1px solid rgba(211, 211, 211, 0.2);
+        
+                button {
+                    border:1px solid rgba(211, 211, 211, 0.2);
+                    color: var(--bs-orange);
+                
+                }
+            }
             
             a {
                 width: 100%;
@@ -244,6 +265,8 @@
                 img {
                     max-width: 100%;
                     width: 80px;
+                    height: 80px;
+                    object-fit: contain;
 
                 }
                 p {
@@ -261,7 +284,11 @@
                 button {
                     width: 30px;
                     height: 30px;
-                    border:1px solid red;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                   color: rgba(211, 211, 211, 0.8);
+                   border:1px solid transparent;    
+                   transition: border 0.2s, color 0.2s;
                     &:hover {
                         opacity: 0.6;
                     }
@@ -292,3 +319,65 @@
  .myacc-conthalf-cont-userdetails {
     min-height: 100px;
    }
+.myacc-cotnhalf-left-mobhambmenu {
+    cursor: pointer;
+    display: none;
+    svg {
+        font-size: 35px;
+    }
+}
+
+   
+ 
+
+@media (max-width: 991.5px) {
+    .myaccount-cont-wrapper {
+        flex-direction: column;
+    }
+    .myacc-cont-half-leftmenu,
+    .myacc-cont-half-content {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .myacc-cont-half-leftmenu {
+        min-height: auto;
+    }
+    .myacc-cont-half-content {
+        padding: 0;
+    }
+
+    .myacc-cont-half-leftmenu {
+        .hidemob-ul-list {
+             max-height: 0;
+         }
+        }
+        .myacc-cotnhalf-left-mobhambmenu { 
+            display: block;
+        }
+}
+
+@media (max-width: 767.5px) {
+    .myacc-conthalfcont-userdetails-wrp,
+    .myacc-conthalfcont-activity-wrp {
+        display: flex;
+        flex-direction: column;
+    }
+    .myacccont-cont-details {
+        margin-top:20px;
+    }
+    .myacccont-activity-box {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576.5px) {
+    .chck-type-sec {
+        flex-direction: column;
+    }
+    .chcktype-secaddress-wrp,
+    .chck-type-sec div {
+        width: 100%;
+    }
+ 
+}

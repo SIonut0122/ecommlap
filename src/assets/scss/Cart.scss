@@ -48,23 +48,29 @@
     border:1px transparent;
     background-color: var(--bs-white);
     display: flex;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 10px;
+    margin-bottom: 15px;
+    padding: 5px 15px;
+    border-radius: 5px;
     transition: box-shadow 0.2s;
-    box-shadow: 0 0 2px 0 #000;
+    border:1px solid var(--color-lightgray-border);
 
+    
     p {
         margin: 0;
     }
     &:hover {
-        box-shadow: 0 0 1px 0 #000;
-
+       border:1px solid var(--color-lightgray-border-hover);
+    }
+    .cart-item-img-wrp {
+        height: 120px;
+        width: 120px;
     }
     img {
-        max-width: 100%;
-        height: auto;
-        max-height: 130px;
+        
+        height: 120px;
+        min-width: 120px;
+        object-fit: contain;
+        padding: 10px;
     }
 }
 

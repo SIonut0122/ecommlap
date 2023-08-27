@@ -1,5 +1,6 @@
 import React, {useContext, useState,useEffect } from "react";
 import { MainContext} from "../MainHome";
+import { useNavigate }   from 'react-router-dom'; 
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from './modules/loginButton';
 import LogoutButton from "./modules/logoutButton";
@@ -22,7 +23,7 @@ const myEmail = import.meta.env.VITE_MYEMAIL;
 
 
 function Checkout() {
-
+    const navigate = useNavigate();
     const [selectedValue, setSelectedValue] = useState('Livrare prin curier');
     const [name, setName] = useState('');
     const [lastName, setLastname] = useState('');
@@ -42,16 +43,38 @@ function Checkout() {
     const { successOrder, setSuccessOrder } = useContext(MainContext);
     const [isProcessing, setIsProcessing] = useState(false);
     const { user, isAuthenticated, isLoading } = useAuth0();
-    
+    const [ giveDiscount, setGiveDiscount ] = useState(false);
+    const [ giveFreeShipping, setGiveFreeShipping ] = useState(false);
+    const [ finalSum, setFinalSum ] = useState('0')
     
     useEffect(() => {
         if(!proceedToCheckout) {
             window.location.replace('/cart');
         } 
         document.title = "Detalii comanda"; 
+        
+        let discountedPrice = (5 / 100) * cartTotalContext;
+        let totalAfterDiscount = parseFloat(cartTotalContext) - discountedPrice;
+
+        // check discount & free shipping
+        let sumCart = parseFloat(cartTotalContext); 
+        if(sumCart > 6000) {
+            setGiveDiscount(true);
+            setGiveFreeShipping(true);
+            setFinalSum(totalAfterDiscount);
+
+        } else if(sumCart > 3000 && sumCart < 6000) {
+            setGiveDiscount(true);
+            setFinalSum(totalAfterDiscount + 19.99);
+        } else if(sumCart < 3000 && sumCart < 6000) {
+            setGiveDiscount(false);
+            setGiveFreeShipping(false);
+            setFinalSum(cartTotalContext + 19.99);
+            
+        }
     },[])
 
- 
+    
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
@@ -239,18 +262,28 @@ function Checkout() {
             From : myEmail,
             Subject : "Tranzactia" + transactionNumber + "a fost inregistrata!",
             Body : htmlTemplate(transactionNumber)
-        }).then(
+        }).then(() => {
             // Use this to display the '/order-summary' page
-            setSuccessOrder(true),
-            setTimeout(() => {
-            window.location = '/order-summary'
-            },4000)
-        ).catch(() => {
+            setSuccessOrder(true)
+        })
+        .catch((err) => {
+            console.log(err);
             setIsProcessing(false),
             document.querySelector('.checkout-error-msg').style.display = 'block !important';
         })
             
     }
+
+    useEffect(() => {
+        if(successOrder) {
+            console.log(successOrder);
+            setTimeout(() => {
+                navigate('/order-summary');
+            },4000)
+        }
+    },[successOrder]);
+
+
     return (
         <div className="w-100">
             {!proceedToCheckout ? (
@@ -405,15 +438,17 @@ function Checkout() {
                                             </div>
                                             <div className="checkout-summary-row">
                                                 <p>Cost livrare:</p>
-                                                <p>19.99 lei</p>
+                                                {giveFreeShipping ? (<p>Gratuita</p> ) : (<p >19.99 lei</p>)}
                                             </div>
-                                            <div className="checkout-summary-row">
-                                                <p>Discount (3000lei):</p>
+                                            {giveDiscount && (
+                                                <div className="checkout-summary-row">
+                                                <p>Discount (peste 6000lei):</p>
                                                 <p>-5%</p>
                                             </div>
+                                            )}
                                         </div>
                                         <div className="checkoutcontrow-checkoutsummary-col checkoutsummary-col-right">
-                                            <p className="content-title">Total: {displayTotalAmount()} lei</p>
+                                            <p className="content-title">Total: {finalSum} lei</p>
                                             <p className="checkout-error-msg">A intervenit o eroare in procesarea comenzii!</p>
                                             
                                                     <button type="submit"

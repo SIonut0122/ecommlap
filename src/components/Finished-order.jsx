@@ -9,7 +9,8 @@ function FinishedOrder( ) {
     useEffect(() => {
         if(!successOrder) {
             window.location.replace('/cart');
-        } 
+        } else {
+        }
        document.title = "Comanda finalizata"; 
        // Reset checkout value
        setProceedToCheckout(false);
@@ -31,7 +32,7 @@ function FinishedOrder( ) {
                     <p>Detaliile comenzii au fost furnizate la adresa indicata. Poti sa urmaresti starea comenzii de pe pagina <a href="/contul-meu">contul meu</a></p>
 
                     <div className="cart-summ-checkout-wrp btn-org-btn">
-                        <Link to={'/'}>
+                        <Link to={'/products'}>
                         <button type="button">
                             Inapoi pe prima pagina
                         </button>
