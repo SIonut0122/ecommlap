@@ -75,9 +75,10 @@
         }
     }
 }
-.head-logo-icon {
-    color: var(--bs-orange);
-    font-weight: bold;
+.head-logo-icon img{
+   max-width: 100%;
+   width: 45px;
+   
 }
 .header-wrapuser-auth {
     display: flex;

@@ -13,6 +13,7 @@ import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import logoIcon from '../../assets/images/header/5654360.jpg';
 
 function Header( ) {
   const { cartContext, setCartContext } = useContext(MainContext);
@@ -135,7 +136,7 @@ function Header( ) {
                             <MenuIcon />
                         </div>
                         <div className="head-wrap-logo">
-                            <Link to={'/'} className="head-logo-icon"><LogoDevOutlinedIcon /></Link>
+                            <Link to={'/'} className="head-logo-icon"><img src={logoIcon} alt='Ecommercelap'/></Link>
                         </div>
                         <div className="head-wrap-mobile-icons">
                         <Link to={'/favorites'} className="head-right-icon btn-def-act">
