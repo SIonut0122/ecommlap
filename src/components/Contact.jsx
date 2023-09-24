@@ -13,7 +13,19 @@ function Contact( ) {
   const submitContactForm = (e) => {
     // prevent submit
     e.preventDefault();
+    let missingInput = false;
+
+    let inputs = document.querySelectorAll('.contact-input');
     
+    inputs.forEach(el => {
+      if(el.value.length === 0) {
+        missingInput = true;
+      }
+    })
+    
+    if(missingInput) {
+      return;
+    }
     // reset form and display success msg
     e.target.reset();
     let successMsg = document.getElementById('contact-msg-success');
@@ -101,19 +113,19 @@ function Contact( ) {
                 <form method="POST" className="contact-cwrp-mid" onSubmit={(e) => submitContactForm(e)}>
                   <div className="mb-3">
                     <label htmlFor="contact-name" className="form-label">Nume si prenume *</label>
-                    <input type="text" className="form-control" id="contact-name" placeholder=""/>
+                    <input type="text" className="form-control contact-input" id="contact-name" required placeholder=""/>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="contact-phone" className="form-label">Telefon</label>
-                    <input type="text" className="form-control" id="contact-phone" placeholder=""/>
+                    <input type="text" className="form-control contact-input" id="contact-phone" required placeholder=""/>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="contact-email" className="form-label">Email *</label>
-                    <input type="text" className="form-control" id="contact-email" placeholder=""/>
+                    <input type="text" className="form-control contact-input" id="contact-email" required placeholder=""/>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="exampleFormControlTextarea1" className="form-label">Mesaj *</label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea className="form-control contact-input" id="exampleFormControlTextarea1" rows="3" required ></textarea>
                   </div>
                   <div className="contact-mid-wrpbtn">
                     <button className="btn" type="submit">Trimite</button>

@@ -109,6 +109,8 @@
             
             .thumbs {
                 @include displayFlex();
+                flex-wrap: wrap;
+                padding: 0;
             }
             .thumb {
                 border:1px solid var(--bs-orange);

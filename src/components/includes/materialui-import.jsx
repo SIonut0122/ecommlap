@@ -14,6 +14,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 export {IconButton, 
     AddIcon, 
@@ -28,6 +29,7 @@ export {IconButton,
     AddShoppingCartIcon, 
     GoogleIcon,
     KeyboardDoubleArrowRightIcon,
-    ShoppingCartIcon
+    ShoppingCartIcon,
+    LocalOfferIcon
 
 };

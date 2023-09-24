@@ -117,7 +117,7 @@ function MainHome() {
 
   
   return (
-<BrowserRouter basename="/ecommlap">
+<BrowserRouter basename="/">
     <div className='main_container'>
     
     <div className="mobile-menu-container">
