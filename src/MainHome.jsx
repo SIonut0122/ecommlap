@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, createContext} from "react";
 import { HashRouter,Routes,Route,Link , BrowserRouter}     from 'react-router-dom'; 
 import './assets/js/js';
 import Header from './components/includes/Header';
+import Footer from './components/includes/Footer';
 import MobileMenu from './components/includes/MobileMenu';
 import Home from './components/Home';
 import PageNotFound from './components/Pagenotfound';
@@ -19,7 +20,7 @@ import Search from './components/Search';
 import Offers from './components/Offers';
 import Contact from './components/Contact';
 import MyAccount from './components/MyAccount';
-
+import {client,q} from './faunadb/db';
 
 
 
@@ -42,7 +43,26 @@ function MainHome() {
   const [successOrder, setSuccessOrder] = useState(false);
   const [displayOffers, setDisplayOffers] = useState(false);
 
+ 
 
+  // function populateCollection(dataList) {
+  //   client.query(
+  //     q.Map(
+  //       dataList,
+  //       q.Lambda(
+  //         'all_products',
+  //         q.Create(
+  //           q.Collection('ecommlapproducts'),
+  //           {  data: q.Var('all_products') },
+  //         )
+  //       ),
+  //     )
+  //   )
+  //   .then((ret) => console.log(ret))
+  // }
+
+  // populateCollection(products);
+  
 
   useEffect(() => {
     // function shuffleArray(array) {
@@ -54,7 +74,6 @@ function MainHome() {
     // }
 
     
-
     // Check localStorage
     // cart
     if(localStorage.getItem('cart') !== null && localStorage.getItem('cart').length > 0) {
@@ -98,7 +117,7 @@ function MainHome() {
 
   
   return (
-<BrowserRouter>
+<BrowserRouter basename="/">
     <div className='main_container'>
     
     <div className="mobile-menu-container">
@@ -144,6 +163,8 @@ function MainHome() {
                     <Route path="/contact" element={<Contact />}></Route>
                     <Route path="/myaccount" element={<MyAccount />}></Route>
                 </Routes>
+
+                <Footer/>
                    
               </MainContext.Provider>
         

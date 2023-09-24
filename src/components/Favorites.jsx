@@ -43,9 +43,9 @@ function Favorites( ) {
                 (
                   <div className="fav-userbox-right-loggedin">
                    <p>{user.nickname}</p>
-                   <Link to={'/user/myaccount'}>Contul meu</Link>
-                   <Link to={'/favorite'}>Favorite</Link>
-                   <Link to={'/myorders'}>Comenzile mele</Link>
+                   <Link to={'/myaccount'}>Contul meu</Link>
+                   <Link to={'/favorites'}>Favorite</Link>
+                   <Link to={'/myaccount'}>Comenzile mele</Link>
                    </div>
                 )}
                 </div>
@@ -95,7 +95,7 @@ function Favorites( ) {
                     <FolderSpecialRoundedIcon/>
                       <p>Hmm, niciun produs in lista ta.</p>
                       <p>Uite niste recomandari care te-ar putea inspira.</p>
-                      <Link to={'/produse'}>
+                      <Link to={'/products'}>
                          <button type='button' className="btn-def-mid-250">Vezi recomandari</button>
                      </Link>
                     </div>

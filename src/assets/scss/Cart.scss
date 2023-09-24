@@ -283,9 +283,26 @@
 
 .empty-cart-wrapper {
     width: 100%;
+    @include displayFlexColumn;
+    text-align: center;
+    padding-top:100px;
+    align-items: center;
+    min-height: 400px;
 
+    svg {
+        height: 50px;
+        width: 50px;
+        fill: var(--bs-orange);
+        margin-bottom: 20px;
+    }
     a {
         text-decoration: underline;
+        color: var(--bs-orange);
+        font-weight: bold;
+
+        &:hover {
+            color: var(--bs-orange-hover);
+        }
     }
 }
 

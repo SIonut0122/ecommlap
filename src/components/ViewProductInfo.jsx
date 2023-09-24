@@ -67,6 +67,12 @@ function ViewProductInfo( ) {
 
     // Set window title
     document.title = selectedProduct.title;
+  
+    // remove skeleton loading
+   setTimeout(() => {
+    document.querySelectorAll('body .skelet-load').forEach(el => el.remove());
+   },200);
+
   },[selectedProduct]);
 
   useEffect(() => {
@@ -109,12 +115,15 @@ let discountPercentage = () => {
     <div className="productinfo-cont-wrp">
                 <div className='productinfo-container container'>
           <div className='productinfo-wrp-prodhref'>
-            <span><Link to={'/products'}>Produse</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></span>
+            <span className="skelet-load"></span>
+
+            <div><Link to={'/products'}>Produse</Link> / Laptopuri / <Link to={`/viewproduct/${selectedProduct.id}`}>{selectedProduct.title}</Link></div>
             <p>Cod produs: {selectedProduct.modelNo}</p>
           </div>
-          <div className='productinfo-wrp-prodtitle'><h4>{selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
+          <div className='productinfo-wrp-prodtitle'><span className="skelet-load"></span><h4>{selectedProduct.title}, {selectedProduct.brand}, {selectedProduct.modelNo}</h4></div>
 
           <div className='productinfo-wrapper'>
+          <span className="skelet-load"></span>
             <section className='prodinfo-wrp-col-one'>
             <span className="allprod-badge-offer">Super pret</span>
             <Carousel showArrows={false} emulateTouch={true} showIndicators={false} showStatus={false}>

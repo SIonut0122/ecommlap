@@ -48,7 +48,7 @@ const products = [
     {
         id: '2',
         productType: 'laptopuri',
-        title: 'acer Aspire 3 A315-24P-R7VH Slim Laptop | 15.6" Full HD IPS Display | AMD Ryzen 3 7320U Quad-Core Processor | AMD Radeon Graphics | 8GB LPDDR5 | 128GB NVMe SSD | Wi-Fi 6 | Windows 11 Home in S Mode ',
+        title: 'Acer Aspire 3 A315-24P-R7VH Slim Laptop | 15.6" Full HD IPS Display | AMD Ryzen 3 7320U Quad-Core Processor | AMD Radeon Graphics | 8GB LPDDR5 | 128GB NVMe SSD | Wi-Fi 6 | Windows 11 Home in S Mode ',
         price: 3255,
         oldPrice: 3599,
         hoverImg: '',
@@ -592,7 +592,7 @@ const products = [
     {
         id: '14',
         productType: 'laptopuri',
-        title: '15.6" KUU Laptop Intel Celeron N5095, 16GB RAM, 512GB SSD, Win 11 Pro, Backlit Keyboard, Wifi & Bluetooth ',
+        title: 'KUU Laptop Intel Celeron N5095, 16GB RAM, 512GB SSD, Win 11 Pro, Backlit Keyboard, Wifi & Bluetooth ',
         price: 2011,
         oldPrice: 2695,
         hoverImg: '',
@@ -1646,7 +1646,7 @@ const products = [
         addedToCart: false,
         addedToFav: false,
         brand: 'Mosiso',
-        availability: ['Stoc epuizat', 'Promotii'],
+        availability: 'Stoc epuizat',
         color: 'blue',
         rating: 4.5,
         info: [

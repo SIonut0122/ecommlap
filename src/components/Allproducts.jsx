@@ -8,6 +8,8 @@ import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import CircularProgress from '@mui/material/CircularProgress';
+// import getAllProducts from "../faunadb/getAllProducts";
+import { client, q } from '../faunadb/db';
 
 
 
@@ -59,6 +61,7 @@ function AllProducts() {
 
  
   useEffect(() => {
+ 
     setPureProductsList(productsContext);
     
     let brandsList = [];
@@ -132,12 +135,43 @@ function AllProducts() {
   // Set window title
   document.title = 'Laptopuri si accesorii - Comanda online';
 
+  getAll();
+
   return () => {
     setDisplayAddedToCartMsg(false);
     setDisplayOffers(false);
   };
+  
   },[])
 
+  
+  async function getAll() {
+    try {
+      const response = await client.query(
+        q.Paginate(q.Match(q.Ref('indexes/all_products')))
+      );
+  
+      const productsRefs = response.data;
+  
+      // Create an array to store unique products based on their id
+      const uniqueProducts = [];
+  
+      // Iterate through the productsRefs and fetch each product
+      for (const ref of productsRefs) {
+        const product = await client.query(q.Get(ref));
+  
+        // Check if the product's id is not already in the uniqueProducts array
+        if (!uniqueProducts.some((uniqueProduct) => uniqueProduct.id === product.data.id)) {
+          uniqueProducts.push(product.data);
+        }
+      }
+  
+      console.log(uniqueProducts);
+    } catch (error) {
+      console.log('error', error.message);
+    }
+  }
+  
   
 
   useEffect(() => {
@@ -401,15 +435,13 @@ const sortBy = (prods) =>  {
   let sortByProducts = prods === undefined ? [...productsContext] : [...prods];
   let sortByValue = sortByOption;
   let sortedProducts = [];
-
   switch(sortByOption) {
-    case 'Nume (a - z)':
-      let sortByNameAz = sortByProducts.sort((p1, p2) => (p1.title > p2.title) ? 1 : (p1.title < p2.title) ? -1 : 0);
+    case 'Nume (a-z)':
+      let sortByNameAz = sortByProducts.sort((p1, p2) => (p1.title.split(' ')[0] > p2.title.split(' ')[0]) ? 1 : (p1.title.split(' ')[0] < p2.title.split(' ')[0]) ? -1 : 0);
       setSortedProducts(sortByNameAz);
-     
     break;
-    case 'Nume (z - a)':
-      let sortByNameZa = sortByProducts.sort((p1, p2) => (p1.title > p2.title) ? -1 : (p1.title < p2.title) ? 1 : 0);
+    case 'Nume (z-a)':
+      let sortByNameZa = sortByProducts.sort((p1, p2) => (p1.title.split(' ')[0] > p2.title.split(' ')[0]) ? -1 : (p1.title.split(' ')[0] < p2.title.split(' ')[0]) ? 1 : 0);
       setSortedProducts(sortByNameZa);
     break;
     case 'Pret (Crescator)':
@@ -448,6 +480,23 @@ const setFilter = (filterType, value) => {
     ...passingTags,
     [filterType]: { ...passingTags[filterType], [value]: !passingTags[filterType][value] }
   });
+
+  // after filter, go to the first page from pagination
+    let allProdPaginationBtns = document.querySelectorAll('.pagination-products li a');
+        allProdPaginationBtns.forEach(el => {
+          if(el.innerHTML === '1') {
+             if(el) {
+              el.click();
+             }
+          }
+        })    
+        
+        // when a filter it set, display loading spinner. After 1sec, hide it
+        document.querySelector('.allprod-loading-container-first').classList.remove('d-none');
+        setTimeout(() => {
+          document.querySelector('.allprod-loading-container-first').classList.add('d-none');
+        },1000);
+
   }, 500);  
 }
 
@@ -872,6 +921,14 @@ const higherThan = '<';
             </div>
 
             <div className='allprod-wrpd-wrapper'>
+              <div className='allprod-loading-container-first d-none'>
+                <div className='allprod-loading-container-spinner'>
+                <div className="spinner-border text-light" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                </div>
+              </div>
+                    
               <PaginatedItems itemsPerPage={9} />   
             </div>        
           </div>

@@ -79,6 +79,14 @@ $darkGray: #333333;
       text-align: center;
       padding: 1rem;
       position: relative;
+
+      h1 {
+        font-weight: bold;
+        font-size: 60px;
+      }
+      p {
+        font-size: 25px;
+      }
     
     }
     
@@ -99,10 +107,18 @@ $darkGray: #333333;
     .top-section .left {
       background-color: rgb(248, 250, 249, var(--background-opacity));
       position: relative;
+      padding-top:50px;
     }
     .left h1 {
       font-weight: bold;
       font-size: 50px;
+      span {
+        color: var(--bs-orange);
+      }
+    }
+    .left p {
+      font-size: 25px;
+      margin-top:15px;
     }
     .top-section .right {
       background: linear-gradient(
@@ -201,4 +217,33 @@ $darkGray: #333333;
  .home-container {
   min-height: 200px;
   position: relative;
+ }
+
+ // page not found 404
+ .pagenotfound-container {
+  @include displayFlex;
+  width: 100%;
+ }
+
+ .pagenotfound-cont {
+  min-height: 400px;
+  @include displayFlex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top:70px;
+
+  img {
+    max-width: 100%;
+    width: 200px;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 50px;
+    margin:20px 0 5px 0;
+  }
+  h4 {
+    font-size: 20px;
+  }
  }

@@ -7,7 +7,7 @@ import img2 from '../assets/images/homepage/img-2.png';
 import img3 from '../assets/images/homepage/img-3.png';
 import deploy from '../assets/images/homepage/deploy.png';
 import envCard from '../assets/images/homepage/env-card.png';
-import type from '../assets/images/homepage/type.png';
+import typePic from '../assets/images/homepage/type.png';
 
 
 function Home() {
@@ -94,7 +94,7 @@ function Home() {
               </div>
               <section className="top-section full-screen-section">
                 <div className="left">
-                  <h1>Magazinul tau online de tehnologie</h1>
+                  <h1>Magazinul tau online de <span>tehnologie</span></h1>
                   <p>
                     Alege laptop-ul care ti se potriveste din varietatea noastra de produse.
                   </p>
@@ -102,7 +102,7 @@ function Home() {
                 <div className="right">
                 <img className="deploy" src={deploy} data-img-right />
                 <img className="envcard" src={envCard} data-img-right />
-                <img className="type" src={type} data-img-right />
+                <img className="type" src={typePic} data-img-right />
                 </div>
               </section>
               <section className="full-screen-section first-main-section">

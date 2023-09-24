@@ -44,6 +44,7 @@ function ProductInfoBottom(props) {
     return (
         <div>
             <div className="prodinfo-infobottom-nav">
+                <span className="skelet-load"></span>
                 <div className="container">
                 <span className='prodinfo-inav-btn selected-nav-info' data-descr='description'>Descriere</span>
                 <span className='prodinfo-inav-btn' data-descr='specifications'>Specificatii</span>
@@ -51,6 +52,7 @@ function ProductInfoBottom(props) {
                 </div>
             </div>
             <div className="prodinfo-infobottom-cont container">
+            <span className="skelet-load"></span>
                 {displayDescription && (
                       <>
                         {productInfo.info && (

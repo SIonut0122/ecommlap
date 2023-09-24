@@ -280,13 +280,33 @@
     width: 100%;
     justify-content: center;
     border-top: 1px solid var(--bs-orange-hover);
+    min-height: 55px;
  
 
     a,link {
         font-weight: bold;
         margin-right: 25px;
+        padding: 8px 5px;
         cursor: pointer;
         color: var(--bs-orange);
+        transition: color 0.2s;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            height: 50%;
+            top:50%;
+            transform: translateY(-50%);
+            width: 0.5px;
+            background-color: rgba(255,255,255,0.2);
+        }
+        &:last-child {
+            &:after {
+                background-color: transparent;
+            }
+        }
 
         &:hover {
             opacity: 0.8;

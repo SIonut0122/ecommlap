@@ -5,7 +5,7 @@ import products from '../assets/js/products';
 import RemoveCartProduct from './modules/removecartproduct';
 import AddToFavorites from './modules/addtofavbtn';
 import AddToFavFromCart from './modules/addtofavfromcart';
-import {IconButton, AddIcon, RemoveIcon, TextField, Button, ShoppingCartCheckoutIcon} from './includes/materialui-import';
+import {IconButton, AddIcon, RemoveIcon, TextField, Button, ShoppingCartCheckoutIcon, ShoppingCartIcon} from './includes/materialui-import';
 
 
 
@@ -177,7 +177,8 @@ function Cart( ) {
                 </div>
                 ) : (
                   <div className="empty-cart-wrapper">
-                    <p>Cosul tau este gol. Pentru a adauga produse, intoarce-te in <Link to={'/allproducts'}>magazin</Link>.</p>
+                    <ShoppingCartIcon />
+                    <p>Cosul tau este gol. Pentru a adauga produse, intoarce-te in <Link to={'/products'}>magazin</Link>.</p>
                   </div>
                 )}
           

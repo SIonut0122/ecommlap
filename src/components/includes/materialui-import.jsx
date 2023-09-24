@@ -13,6 +13,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export {IconButton, 
     AddIcon, 
@@ -26,6 +27,7 @@ export {IconButton,
     DeleteIcon,
     AddShoppingCartIcon, 
     GoogleIcon,
-    KeyboardDoubleArrowRightIcon
+    KeyboardDoubleArrowRightIcon,
+    ShoppingCartIcon
 
 };

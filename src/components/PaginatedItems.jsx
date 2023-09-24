@@ -11,6 +11,7 @@ import ReactPaginate from 'react-paginate';
 
 function Items({ currentItems }) {
   const {displayFilteredProducts} = useContext(MainContext);
+  const [ renderProducts, setRenderProducts ] = useState(false);
   const { pureProductsList, setPureProductsList } = useContext(MainContext);
 
 
@@ -26,9 +27,20 @@ function Items({ currentItems }) {
       }
     }, 300);
   }
+ 
   useEffect(() => {
-    console.log('loaded');
-  },[]);
+    // in mount, set to false to hide products
+    setTimeout(() => {
+        setRenderProducts(true);
+    },500);
+    // remove loading spinner
+    setTimeout(() => {
+      if(document.querySelector('.allprod-loading-container')) {
+        document.querySelector('.allprod-loading-container').classList.add('d-none');
+      }
+  },1000);
+ 
+  },[currentItems]);
 
   const handleMouseOut = () => { 
     clearTimeout(timeoutId);
@@ -47,13 +59,14 @@ function Items({ currentItems }) {
 
   return (
     <>
-      {currentItems.length > 0 ? (
+      {currentItems.length > 0 && renderProducts ? (
         <>
           {currentItems.map((el,ind) => 
               <div className='allprod-wrpdwrap-proditem allprod-wrpdwrap-proditem-grid'
               style={{opacity: !displayFilteredProducts ? '0.5': '1', pointerEvents: !displayFilteredProducts ? 'none': 'visible'}}
               key={el.id}
-               >
+               >        
+                  
                         <div className='allprod-product-thumb'>
                         {el.oldPrice > 0 ? ( <span className="allprod-badge-offer">Super pret</span> ) : ("")}
                         <span className="allprod-thumb-fav">
@@ -100,7 +113,17 @@ function Items({ currentItems }) {
           )}
         </>
         ) : (
-              <div className='allprod-empty-cont'>Nu s-a gasit nimic</div>
+          
+              <div className='allprod-empty-cont'>
+                <div className='allprod-loading-container'>
+                  <div className='allprod-loading-container-spinner'>
+                  <div className="spinner-border text-light" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                  </div>
+                </div>
+                Nu s-a gasit nimic
+              </div>
         )}
     </>
   );
