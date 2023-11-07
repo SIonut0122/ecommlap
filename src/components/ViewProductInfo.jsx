@@ -74,10 +74,7 @@ function ViewProductInfo( ) {
    },200);
 
   },[selectedProduct]);
-
-  useEffect(() => {
-    console.log('Added to cart from product info');
-  },[cartContext])
+ 
 
   const priceAlert = () => {
     // Get the existing alertProducts list from localStorage

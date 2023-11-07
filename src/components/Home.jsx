@@ -71,7 +71,6 @@ function Home() {
         document.querySelectorAll("[data-img]").forEach(img => {
           img.classList.remove("show")
         })
-        console.log(entry.target.dataset);
         const img = document.querySelector(entry.target.dataset.imgToShow)
         img?.classList.add("show")
         break

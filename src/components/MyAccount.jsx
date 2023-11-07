@@ -70,7 +70,6 @@ function MyAccount() {
 
   const handleNabBtns = (e) => {
     let navValue = e.target.getAttribute('data-myacc-nav');
-      console.log('clicked');
     setDisplayAddressContainer(false);
     setDisplayPriceAlertContainer(false);
     setDisplayAccountDataContainer(false);

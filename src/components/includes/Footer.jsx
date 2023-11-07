@@ -30,7 +30,7 @@ function Footer() {
             <div className="footer-bottom container">
                 <div className="footer-bottom-column">
                     <p className="fbottom-col-title">
-                    Despre Altex
+                    Despre
                     </p>
                     <a href='#'>Despre noi</a>
                     <a href='#'>Marketplace</a>

@@ -276,7 +276,6 @@ function Checkout() {
 
     useEffect(() => {
         if(successOrder) {
-            console.log(successOrder);
             setTimeout(() => {
                 navigate('/order-summary');
             },4000)

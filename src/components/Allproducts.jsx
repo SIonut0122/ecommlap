@@ -166,7 +166,6 @@ function AllProducts() {
         }
       }
   
-      console.log(uniqueProducts);
     } catch (error) {
       console.log('error', error.message);
     }
